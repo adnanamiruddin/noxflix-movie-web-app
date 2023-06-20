@@ -4,7 +4,7 @@ import publicClient from "../client/public.client";
 const userEndPoints = {
   signIn: "user/signin",
   signUp: "user/signup",
-  getInfo: "user/info",
+  info: "user/info",
   updatePassword: "user/update-password",
 };
 
@@ -37,7 +37,7 @@ const userApi = {
   },
   getInfo: async () => {
     try {
-      const response = await privateClient.get(userEndPoints.getInfo);
+      const response = await privateClient.get(userEndPoints.info);
 
       return { response };
     } catch (error) {
@@ -46,7 +46,7 @@ const userApi = {
   },
   updatePassword: async ({ password, newPassword, confirmNewPassword }) => {
     try {
-      const response = await privateClient.put(userEndPoints.passwordUpdate, {
+      const response = await privateClient.put(userEndPoints.updatePassword, {
         password,
         newPassword,
         confirmNewPassword,
