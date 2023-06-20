@@ -14,7 +14,6 @@ export const userSlice = createSlice({
         if (action.payload.token)
           localStorage.setItem("actkn", action.payload.token);
       }
-
       state.user = action.payload;
     },
     setListFavorites: (state, action) => {
