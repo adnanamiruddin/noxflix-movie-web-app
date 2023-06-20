@@ -5,7 +5,7 @@ const userEndPoints = {
   signIn: "user/signin",
   signUp: "user/signup",
   getInfo: "user/info",
-  passwordUpdate: "user/update-password",
+  updatePassword: "user/update-password",
 };
 
 const userApi = {
@@ -44,7 +44,7 @@ const userApi = {
       return { error };
     }
   },
-  passwordUpdate: async ({ password, newPassword, confirmNewPassword }) => {
+  updatePassword: async ({ password, newPassword, confirmNewPassword }) => {
     try {
       const response = await privateClient.put(userEndPoints.passwordUpdate, {
         password,

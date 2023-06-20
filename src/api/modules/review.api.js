@@ -2,7 +2,7 @@ import privateClient from "../client/private.client";
 
 const reviewEndPoints = {
   add: "reviews",
-  remove: ({ reviewId }) => `reviews/:${reviewId}`,
+  remove: ({ reviewId }) => `reviews/${reviewId}`,
   getList: "reviews",
 };
 
