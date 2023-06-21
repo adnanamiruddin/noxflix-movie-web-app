@@ -7,7 +7,7 @@ export const themeModeSlice = createSlice({
   },
   reducers: {
     setThemeMode: (state, action) => {
-      state.themeMode = action.payload
+      state.themeMode = action.payload;
     },
   },
 });
