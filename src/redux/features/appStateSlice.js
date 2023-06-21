@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const appStateSlice = createSlice({
-  name: "ThemeMode",
+  name: "AppState",
   initialState: {
     appState: "",
   },
