@@ -5,7 +5,7 @@ const userEndPoints = {
   signIn: "user/signin",
   signUp: "user/signup",
   info: "user/info",
-  updatePassword: "user/update-password",
+  passwordUpdate: "user/update-password",
 };
 
 const userApi = {
