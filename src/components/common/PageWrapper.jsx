@@ -6,6 +6,7 @@ const PageWrapper = ({ state, children }) => {
   const dispacth = useDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispacth(setAppState(state));
   }, [state]);
 
