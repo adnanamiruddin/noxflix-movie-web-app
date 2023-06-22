@@ -8,19 +8,22 @@ const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
   return (
     <ThemeProvider theme={themeConfigs.custom({ mode: themeMode })}>
-      {/* Config toastify */}
+      {/* Config Toastify START */}
       <ToastContainer
         position="bottom-left"
         autoClose={5000}
-        hideProgressBar={false}
+        theme={themeMode}
         newestOnTop={false}
         closeOnClick
         pauseOnFocusLoss
         pauseOnHover
-        theme={themeMode}
+        hideProgressBar={false}
       />
-      {/* Material UI reset CSS */}
+      {/* Config Toastify END */}
+
+      {/* Material UI reset CSS START */}
       <CssBaseline />
+      {/* Material UI reset CSS END */}
     </ThemeProvider>
   );
 };
