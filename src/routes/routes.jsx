@@ -15,7 +15,7 @@ export const routesGen = {
   mediaSearch: "/search",
   person: (id) => `/person/${id}`,
   favoriteList: "/favorites",
-  passwordUpdate: "/password-update",
+  passwordUpdate: "password-update",
 };
 
 const routes = [
