@@ -2,6 +2,7 @@ import { Box, LinearProgress, Paper, Toolbar } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Logo from "./Logo";
 
 const GlobalLoading = () => {
   const { globalLoading } = useSelector((state) => state.globalLoading);
@@ -40,7 +41,9 @@ const GlobalLoading = () => {
             left: "50%",
             transform: "translate(-50%, -50%)",
           }}
-        ></Box>
+        >
+          <Logo />
+        </Box>
       </Paper>
     </div>
   );
