@@ -66,7 +66,7 @@ const UserMenu = () => {
               <ListItemText
                 disableTypography
                 primary={
-                  <Typography textTransform="uppercase">Log Out</Typography>
+                  <Typography>LOG OUT</Typography>
                 }
               />
             </ListItemButton>

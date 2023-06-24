@@ -19,6 +19,7 @@ import { setThemeMode } from "../../redux/features/themeModeSlice";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import Logo from "./Logo";
 import UserMenu from "./UserMenu";
+import Sidebar from "./Sidebar";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -60,18 +61,26 @@ const Headerbar = () => {
     dispatch(setThemeMode(theme));
   };
 
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
   return (
     <div>
+      {/* Navbar For Mobile View (Active Hamburger Icon) START */}
+      <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
+      {/* Navbar For Mobile View (Active Hamburger Icon) END */}
+
+      {/* Navbar For Tab/Desktop/etc */}
       <ScrollAppBar>
         <AppBar elevation={0} sx={{ zIndex: 9999 }}>
           <Toolbar
-            sx={{ alignItems: "center", justifyContent: "space-between" }}
+            sx={{ alignItems: "center", justifyContent: "space-between", marginTop: "5px" }}
           >
             <Stack direction="row" spacing={1} alignItems="center">
               {/* Mobile View (Hamburger Icon) START */}
               <IconButton
                 color="inherit"
                 sx={{ mr: 2, display: { md: "none" } }}
+                onClick={toggleSidebar}
               >
                 <MenuIcon />
               </IconButton>
@@ -108,8 +117,8 @@ const Headerbar = () => {
                 </Button>
               ))}
               <IconButton sx={{ color: "inherit" }} onClick={onSwitchTheme}>
-                {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
-                {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
+                {themeMode === themeModes.dark ? <DarkModeOutlinedIcon /> : ""}
+                {themeMode === themeModes.light ? <WbSunnyOutlinedIcon /> : ""}
               </IconButton>
             </Box>
             {/* Main Menu Section END */}
