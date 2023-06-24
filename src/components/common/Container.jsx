@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-const ContainerContent = ({ header, children }) => {
+const Container = ({ header, children }) => {
   return (
     <Box
       sx={{
@@ -20,7 +20,7 @@ const ContainerContent = ({ header, children }) => {
               marginX: "auto",
               width: "100%",
               "&::before": {
-                content: "",
+                content: '""',
                 height: "5px",
                 width: "100px",
                 position: "absolute",
@@ -45,4 +45,4 @@ const ContainerContent = ({ header, children }) => {
   );
 };
 
-export default ContainerContent;
+export default Container;
