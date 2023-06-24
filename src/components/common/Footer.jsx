@@ -5,7 +5,6 @@ import menuConfigs from "../../configs/menu.configs"
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  console.log({menuConfigs});
   return (
     <Container>
       <Paper square={true} sx={{ backgroundImage: "unset", padding: "2rem" }}>
