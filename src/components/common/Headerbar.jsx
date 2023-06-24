@@ -115,7 +115,22 @@ const Headerbar = () => {
             {/* Main Menu Section END */}
 
             {/* User Menu Section START */}
-            <UserMenu />
+            {/* If User Already Sign In START */}
+            {user && <UserMenu />}
+            {/* If User Already Sign In END */}
+
+            {/* If User Haven't Sign In START */}
+            <Stack spacing={3} direction="row" alignItems="center">
+              {!user && (
+                <Button
+                  variant="contained"
+                  onClick={() => dispatch(setAuthModalOpen(true))}
+                >
+                  Sign In
+                </Button>
+              )}
+            </Stack>
+            {/* If User Haven't Sign In END */}
             {/* User Menu Section END */}
           </Toolbar>
         </AppBar>
