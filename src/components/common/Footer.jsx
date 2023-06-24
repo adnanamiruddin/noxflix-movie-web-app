@@ -2,6 +2,7 @@ import { Box, Button, Paper, Stack } from "@mui/material";
 import Container from "./Container";
 import Logo from "./Logo";
 import menuConfigs from "../../configs/menu.configs"
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   console.log({menuConfigs});
@@ -17,7 +18,7 @@ const Footer = () => {
           <Logo />
           <Box>
             {menuConfigs.main.map((menu, i) => (
-              <Button key={i}>
+              <Button key={i} sx={{color: "inherit"}} LinkComponent={Link} to={menu.path}>
                 {menu.display}
               </Button>
             ))}
