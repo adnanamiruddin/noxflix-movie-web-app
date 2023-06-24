@@ -1,6 +1,6 @@
 import { cloneElement, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   AppBar,
   Box,
@@ -13,11 +13,12 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import Logo from "./Logo";
 import menuConfigs from "../../configs/menu.configs";
 import { themeModes } from "../../configs/theme.configs";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
+import Logo from "./Logo";
+import UserMenu from "./UserMenu";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -114,6 +115,7 @@ const Headerbar = () => {
             {/* Main Menu Section END */}
 
             {/* User Menu Section START */}
+            <UserMenu />
             {/* User Menu Section END */}
           </Toolbar>
         </AppBar>
