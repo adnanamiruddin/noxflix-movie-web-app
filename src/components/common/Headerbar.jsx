@@ -16,8 +16,8 @@ import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import Logo from "./Logo";
 import menuConfigs from "../../configs/menu.configs";
 import { themeModes } from "../../configs/theme.configs";
-import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
+import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -67,12 +67,14 @@ const Headerbar = () => {
             sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
             <Stack direction="row" spacing={1} alignItems="center">
+              {/* Mobile View (Hamburger Icon) START */}
               <IconButton
                 color="inherit"
                 sx={{ mr: 2, display: { md: "none" } }}
               >
                 <MenuIcon />
               </IconButton>
+              {/* Mobile View (Hamburger Icon) END */}
 
               <Box sx={{ display: { xs: "inline-block", md: "none" } }}>
                 <Logo />
@@ -92,20 +94,27 @@ const Headerbar = () => {
                 <Button
                   key={i}
                   sx={{
-                    color: appState.includes(menu.status)
+                    color: appState.includes(menu.state)
                       ? "primary.contrastText"
                       : "inherit",
                     mr: 2,
                   }}
                   LinkComponent={Link}
                   to={menu.path}
-                  variant={appState.includes(menu.status) ? "contained" : "text"}
+                  variant={appState.includes(menu.state) ? "contained" : "text"}
                 >
                   {menu.display}
                 </Button>
               ))}
+              <IconButton sx={{ color: "inherit" }} onClick={onSwitchTheme}>
+                {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
+                {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
+              </IconButton>
             </Box>
             {/* Main Menu Section END */}
+
+            {/* User Menu Section START */}
+            {/* User Menu Section END */}
           </Toolbar>
         </AppBar>
       </ScrollAppBar>

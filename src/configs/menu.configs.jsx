@@ -11,25 +11,25 @@ const main = [
     display: "home",
     path: "/",
     icon: <HomeOutlinedIcon />,
-    status: "home",
+    state: "home",
   },
   {
     display: "movies",
     path: "/movie",
     icon: <SlideshowOutlinedIcon />,
-    status: "movie",
+    state: "movie",
   },
   {
     display: "tv series",
     path: "/tv",
     icon: <LiveTvOutlinedIcon />,
-    status: "tv",
+    state: "tv",
   },
   {
     display: "search",
     path: "/search",
     icon: <SearchOutlinedIcon />,
-    status: "search",
+    state: "search",
   },
 ];
 
@@ -38,19 +38,19 @@ const user = [
     display: "favorites",
     path: "/favorites",
     icon: <FavoriteBorderOutlinedIcon />,
-    status: "favorites",
+    state: "favorites",
   },
   {
     display: "reviews",
     path: "/reviews",
     icon: <RateReviewOutlinedIcon />,
-    status: "reviews",
+    state: "reviews",
   },
   {
     display: "password update",
     path: "/password-update",
     icon: <LockResetOutlinedIcon />,
-    status: "password.update",
+    state: "password.update",
   },
 ];
 
