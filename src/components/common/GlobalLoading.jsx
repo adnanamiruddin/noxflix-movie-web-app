@@ -26,7 +26,7 @@ const GlobalLoading = () => {
           width: "100vw",
           height: "100vh",
           position: "fixed",
-          zIndex: 99999,
+          zIndex: 999,
           opacity: isLoading ? 1 : 0,
           pointerEvents: "none",
           transition: "all .3s ease",
