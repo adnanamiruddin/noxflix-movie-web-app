@@ -31,6 +31,7 @@ const UserMenu = () => {
               cursor: "pointer",
               userSelect: "none",
               marginLeft: { xs: 2, md: 0 },
+              marginTop: { xs: 0.5, md: 0 },
               textAlign: "center",
             }}
             onClick={toggleMenu}
