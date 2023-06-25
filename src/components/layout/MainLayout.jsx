@@ -4,8 +4,27 @@ import GlobalLoading from "../common/GlobalLoading";
 import Footer from "../common/Footer";
 import Headerbar from "../common/Headerbar";
 import AuthModal from "../common/AuthModal";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import userApi from "../../api/modules/user.api";
+import { setUser } from "../../redux/features/userSlice";
 
 const MainLayout = () => {
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    const authUser = async () => {
+      const { response, error } = await userApi.getInfo();
+
+      if (response) dispatch(setUser(response));
+      if (error) dispatch(setUser(null));
+    };
+
+    authUser();
+  }, [dispatch]);
+
   return (
     <div>
       {/* Global Loading START */}
