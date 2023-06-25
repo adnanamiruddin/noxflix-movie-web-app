@@ -2,8 +2,8 @@ import privateClient from "../client/private.client";
 import publicClient from "../client/public.client";
 
 const userEndPoints = {
-  signin: "users/signin",
-  signup: "users/signup",
+  signin: "user/signin",
+  signup: "user/signup",
   info: "user/info",
   passwordUpdate: "user/update-password",
 };
