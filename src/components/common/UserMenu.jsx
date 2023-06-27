@@ -33,6 +33,7 @@ const UserMenu = () => {
               marginLeft: { xs: 2, md: 0 },
               marginTop: { xs: 0.5, md: 0 },
               textAlign: "center",
+              fontSize: {xs: "1rem", md: "1.5rem"}
             }}
             onClick={toggleMenu}
           >

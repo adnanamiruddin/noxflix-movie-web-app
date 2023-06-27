@@ -11,14 +11,14 @@ const Container = ({ header, children }) => {
     >
       <Stack spacing={4}>
         {/* Header Component Section START */}
-        {header && (
+        {header ? (
           <Box
             sx={{
+              width: "100%",
               position: "relative",
               paddingX: { xs: "20px", md: 0 },
               maxWidth: "1366px",
               marginX: "auto",
-              width: "100%",
               "&::before": {
                 content: '""',
                 height: "5px",
@@ -34,6 +34,8 @@ const Container = ({ header, children }) => {
               {header}
             </Typography>
           </Box>
+        ) : (
+          ""
         )}
         {/* Header Component Section END */}
 
