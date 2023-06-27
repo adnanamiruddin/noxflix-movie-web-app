@@ -6,7 +6,7 @@ const mediaType = {
 const mediaCategory = {
   popular: "popular",
   top_rated: "top_rated",
-  now_playing: "now_playing"
+  now_playing: "now_playing",
 };
 
 const backdropPath = (imgEndPoint) => `https://image.tmdb.org/t/p/original${imgEndPoint}`;

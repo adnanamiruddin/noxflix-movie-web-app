@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {
   Box,
@@ -182,7 +182,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                     startIcon={<PlayArrowIcon />}
                     LinkComponent={Link}
                     to={routesGen.mediaDetail(mediaType, movie.id)}
-                    sx={{width: "max-content"}}
+                    sx={{ width: "max-content" }}
                   >
                     Watch Now!
                   </Button>
