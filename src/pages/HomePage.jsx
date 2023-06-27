@@ -49,10 +49,10 @@ const HomePage = () => {
           />
         </Container>
 
-        <Container header="Top Series">
+        <Container header="On The Air Series">
           <MediaSlide
             mediaType={tmdbConfigs.mediaType.tv}
-            mediaCategory={tmdbConfigs.mediaCategory.now_playing}
+            mediaCategory={tmdbConfigs.mediaCategory.on_the_air}
           />
         </Container>
       </Box>
