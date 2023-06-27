@@ -4,8 +4,17 @@ const Logo = () => {
   const theme = useTheme();
 
   return (
-    <Typography fontWeight="700" fontSize="1.7rem">
-      Noxlack<span style={{ color: theme.palette.primary.main }}>Movie</span>
+    <Typography fontWeight="700" fontSize="1.7rem" fontStyle="italic">
+      Noxlack{" "}
+      <span
+        style={{
+          color: theme.palette.primary.main,
+          fontWeight: "900",
+          fontSize: "103%",
+        }}
+      >
+        Movie
+      </span>
     </Typography>
   );
 };
