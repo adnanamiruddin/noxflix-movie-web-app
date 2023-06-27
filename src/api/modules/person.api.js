@@ -11,18 +11,17 @@ const personApi = {
       const response = await publicClient.get(
         personEndPoints.detail({ personId })
       );
-
       return { response };
     } catch (error) {
       return { error };
     }
   },
+
   getMedias: async ({ personId }) => {
     try {
       const response = await publicClient.get(
         personEndPoints.medias({ personId })
       );
-
       return { response };
     } catch (error) {
       return { error };

@@ -1,13 +1,16 @@
 import { ThemeProvider } from "@mui/material/styles";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import themeConfigs from "./configs/theme.configs";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import CssBaseline from "@mui/material/CssBaseline";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
 import MainLayout from "./components/layout/MainLayout";
-import routes from "./routes/routes";
 import PageWrapper from "./components/common/PageWrapper";
+import themeConfigs from "./configs/theme.configs";
+import routes from "./routes/routes";
 
 const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
