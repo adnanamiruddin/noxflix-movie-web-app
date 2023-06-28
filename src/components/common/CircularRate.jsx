@@ -12,7 +12,7 @@ const CircularRate = ({ value }) => {
       <CircularProgress
         variant="determinate"
         value={value * 10}
-        color="success"
+        color={value <= 4 ? "error" : value > 4 && value < 7 ? "warning" : "success"}
         size={50}
       />
       <Box
