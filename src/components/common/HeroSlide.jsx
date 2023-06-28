@@ -131,6 +131,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                   color: "text.primary",
                 }}
               >
+                {/* Movie Content START */}
                 <Stack spacing={4} direction="column">
                   {/* Movie's Title START */}
                   <Typography
@@ -187,6 +188,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                   </Button>
                   {/* Movie's Watch Button END */}
                 </Stack>
+                {/* Movie Content END */}
               </Box>
             </Box>
           </SwiperSlide>

@@ -10,11 +10,12 @@ const HeaderImage = ({ imgPath }) => {
         position: "relative",
         zIndex: "-1",
         paddingTop: { xs: "60%", sm: "40%", md: "35%" },
+        // THE MEDIA'S IMAGE
         backgroundImage: `url(${imgPath})`,
         backgroundPosition: "top",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
-        "$::before": {
+        "&::before": {
           content: '""',
           width: "100%",
           height: "100%",
