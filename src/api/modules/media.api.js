@@ -1,3 +1,4 @@
+import privateClient from "../client/private.client";
 import publicClient from "../client/public.client";
 
 const mediaEndPoints = {
@@ -22,7 +23,7 @@ const mediaApi = {
 
   getDetail: async ({ mediaType, mediaId }) => {
     try {
-      const response = await publicClient.get(
+      const response = await privateClient.get(
         mediaEndPoints.detail({ mediaType, mediaId })
       );
       return { response };

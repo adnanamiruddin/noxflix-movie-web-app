@@ -32,6 +32,7 @@ const MediaDetail = () => {
   const [onRequest, setOnRequest] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getMedia = async () => {
       dispatch(setGlobalLoading(true));
       const { response, error } = await mediaApi.getDetail({
@@ -40,8 +41,8 @@ const MediaDetail = () => {
       });
       if (response) {
         setMedia(response);
-        setGenres(response.genres.splice(0, 3));
         setIsFavorite(response.isFavorite);
+        setGenres(response.genres.splice(0, 3));
       }
       if (error) toast.error(error.message);
       dispatch(setGlobalLoading(false));
@@ -52,30 +53,47 @@ const MediaDetail = () => {
 
   const handleAddFavoriteClick = async () => {
     if (!user) return dispatch(setAuthModalOpen(true));
-
     if (onRequest) return;
-
     if (isFavorite) {
+      handleRemoveFavoriteClick();
       return;
     }
 
     setOnRequest(true);
-      const body = {
-        mediaId,
-        mediaType,
-        mediaTitle: media.title || media.name,
-        mediaPoster: media.poster_path,
-        mediaRate: media.vote_average,
-      };
-      const { response, error } = await favoriteApi.add(body);
-      setOnRequest(false);
+    const body = {
+      mediaId: media.id,
+      mediaType,
+      mediaTitle: media.title || media.name,
+      mediaPoster: media.poster_path,
+      mediaRate: media.vote_average,
+    };
+    const { response, error } = await favoriteApi.add(body);
+    setOnRequest(false);
 
-      if (response) {
-        dispatch(addFavorite(response));
-        setIsFavorite(true);
-        toast.success("Successfully Added to Favorites");
-      }
-      if (error) toast.error(error.message);
+    if (response) {
+      dispatch(addFavorite(response));
+      setIsFavorite(true);
+      toast.success("Successfully Added to Favorites");
+    }
+    if (error) toast.error(error.message);
+  };
+
+  const handleRemoveFavoriteClick = async () => {
+    if (onRequest) return;
+
+    setOnRequest(true);
+    const favorite = listFavorites.find(
+      (e) => e.mediaId.toString() === media.id.toString()
+    );
+    const { response, error } = await favoriteApi.remove({ favoriteId: favorite.id });
+    setOnRequest(false);
+
+    if (response) {
+      dispatch(removeFavorite(favorite));
+      setIsFavorite(false);
+      toast.success("Successfully Remove Favorite");
+    }
+    if (error) toast.error(error.message);
   };
 
   return media ? (
@@ -177,7 +195,7 @@ const MediaDetail = () => {
                 </Typography>
                 {/* Media's Overview/Description END  */}
 
-                {/* Media's Button START */}
+                {/* Media's Buttons START */}
                 <Stack direction="row" spacing={1}>
                   {/* Media's 'Favorite' Button START */}
                   <LoadingButton
@@ -211,7 +229,7 @@ const MediaDetail = () => {
                   >
                     Watch Now!
                   </Button>
-                  {/* Media's 'WATCH NOW' Button END */}
+                  {/* Media's 'WATCH NOW' Buttons END */}
                 </Stack>
                 {/* Media's Button END */}
               </Stack>

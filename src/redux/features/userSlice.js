@@ -19,18 +19,19 @@ export const userSlice = createSlice({
     setListFavorites: (state, action) => {
       state.listFavorites = action.payload;
     },
+    addFavorite: (state, action) => {
+      state.listFavorites = [action.payload, ...state.listFavorites];
+    },
     removeFavorite: (state, action) => {
       const { mediaId } = action.payload;
       state.listFavorites = [...state.listFavorites].filter(
         (e) => e.mediaId.toString() !== mediaId.toString()
       );
     },
-    addFavorite: (state, action) => {
-      state.listFavorites = [action.payload, ...state.listFavorites];
-    },
   },
 });
 
-export const { setUser, setListFavorites, addFavorite, removeFavorite } = userSlice.actions;
+export const { setUser, setListFavorites, addFavorite, removeFavorite } =
+  userSlice.actions;
 
 export default userSlice.reducer;
