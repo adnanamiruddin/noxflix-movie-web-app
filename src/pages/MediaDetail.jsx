@@ -18,6 +18,7 @@ import Container from "../components/common/Container";
 import CircularRate from "../components/common/CircularRate";
 import HeaderImage from "../components/common/HeaderImage";
 import CastSlide from "../components/common/CastSlide";
+import MediaVideosSlide from "../components/common/MediaVideosSlide";
 
 const MediaDetail = () => {
   const { user, listFavorites } = useSelector((state) => state.user);
@@ -61,7 +62,7 @@ const MediaDetail = () => {
 
     setOnRequest(true);
     const body = {
-      mediaId: media.id,
+      mediaId,
       mediaType,
       mediaTitle: media.title || media.name,
       mediaPoster: media.poster_path,
@@ -111,7 +112,7 @@ const MediaDetail = () => {
           ...uiConfigs.style.mainContent,
         }}
       >
-        {/* Media Content START */}
+        {/* Media's Content START */}
         <Box
           sx={{
             marginTop: { xs: "-10rem", md: "-15rem", lg: "-20rem" },
@@ -243,7 +244,15 @@ const MediaDetail = () => {
             {/* Media's Information END */}
           </Box>
         </Box>
-        {/* Media Content END */}
+        {/* Media' Content END */}
+
+        {/* Media's Videos START */}
+        <div ref={videoRef} style={{paddingTop: "2rem"}}>
+          <Container header="Videos">
+            <MediaVideosSlide videos={media.videos} />
+          </Container>
+        </div>
+        {/* Media's Videos END */}
       </Box>
     </div>
   ) : null;
