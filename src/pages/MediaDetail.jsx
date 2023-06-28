@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import Container from "../components/common/Container";
 import CircularRate from "../components/common/CircularRate";
 import HeaderImage from "../components/common/HeaderImage";
+import CastSlide from "../components/common/CastSlide";
 
 const MediaDetail = () => {
   const { user, listFavorites } = useSelector((state) => state.user);
@@ -148,8 +149,9 @@ const MediaDetail = () => {
                 </Typography>
                 {/* Media's Overview/Description END  */}
 
-                {/* Movie's Watch Button START */}
+                {/* Media's Button START */}
                 <Stack direction="row" spacing={1}>
+                  {/* Media's 'Favorite' Button START */}
                   <LoadingButton
                     variant="text"
                     size="large"
@@ -168,6 +170,9 @@ const MediaDetail = () => {
                     loadingPosition="start"
                     loading={onRequest}
                   />
+                  {/* Media's 'Favorite' Button END */}
+
+                  {/* Media's 'WATCH NOW' Button START */}
                   <Button
                     variant="contained"
                     size="large"
@@ -177,12 +182,15 @@ const MediaDetail = () => {
                   >
                     Watch Now!
                   </Button>
+                  {/* Media's 'WATCH NOW' Button END */}
                 </Stack>
-                {/* Movie's Watch Button END */}
+                {/* Media's Button END */}
               </Stack>
 
               {/* Media's Cast START */}
-              <Container header="Cast"></Container>
+              <Container header="Cast">
+                <CastSlide castList={media.credits.cast} />
+              </Container>
               {/* Media's Cast END */}
             </Box>
             {/* Media's Information END */}
