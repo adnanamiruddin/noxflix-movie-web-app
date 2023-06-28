@@ -19,6 +19,8 @@ import CircularRate from "../components/common/CircularRate";
 import HeaderImage from "../components/common/HeaderImage";
 import CastSlide from "../components/common/CastSlide";
 import MediaVideosSlide from "../components/common/MediaVideosSlide";
+import BackdropsSlide from "../components/common/BackdropsSlide";
+import PostersSlide from "../components/common/PostersSlide";
 
 const MediaDetail = () => {
   const { user, listFavorites } = useSelector((state) => state.user);
@@ -86,7 +88,9 @@ const MediaDetail = () => {
     const favorite = listFavorites.find(
       (e) => e.mediaId.toString() === media.id.toString()
     );
-    const { response, error } = await favoriteApi.remove({ favoriteId: favorite.id });
+    const { response, error } = await favoriteApi.remove({
+      favoriteId: favorite.id,
+    });
     setOnRequest(false);
 
     if (response) {
@@ -247,12 +251,38 @@ const MediaDetail = () => {
         {/* Media' Content END */}
 
         {/* Media's Videos START */}
-        <div ref={videoRef} style={{paddingTop: "2rem"}}>
+        <div ref={videoRef} style={{ paddingTop: "2rem" }}>
           <Container header="Videos">
             <MediaVideosSlide videos={media.videos.results.splice(0, 6)} />
           </Container>
         </div>
         {/* Media's Videos END */}
+
+        {/* Media's Backdrops/Images START */}
+        {media.images.backdrops.length > 0 ? (
+          <Container
+            header={
+              mediaType === tmdbConfigs.mediaType.movie
+                ? "Movie Backdrops"
+                : "TV Series Backdrops"
+            }
+          >
+            <BackdropsSlide backdrops={media.images.backdrops} />
+          </Container>
+        ) : (
+          ""
+        )}
+        {/* Media's Backdrops/Images END */}
+
+        {/* Media's Posters START */}
+        {media.images.posters.length > 0 ? (
+          <Container header="Posters">
+            <PostersSlide posters={media.images.posters} />
+          </Container>
+        ) : (
+          ""
+        )}
+        {/* Media's Posters END */}
       </Box>
     </div>
   ) : null;

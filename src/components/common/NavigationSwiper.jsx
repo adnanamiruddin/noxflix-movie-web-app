@@ -28,7 +28,7 @@ const NavigationSwiper = ({ children }) => {
         navigation={true}
         pagination={{ clickable: true }}
         modules={[Navigation, Pagination]}
-        style={{width: "100%", height: "max-content"}}
+        style={{ width: "100%", height: "max-content" }}
       >
         {children}
       </Swiper>

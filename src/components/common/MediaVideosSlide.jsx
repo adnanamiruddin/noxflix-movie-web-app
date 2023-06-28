@@ -20,14 +20,14 @@ const MediaVideo = ({ video }) => {
         src={tmdbConfigs.youtubePath(video.key)}
         ref={iframeRef}
         title={video.id}
-        style={{border: 0}}
+        style={{ border: 0 }}
       ></iframe>
     </Box>
   );
 };
 
 const MediaVideosSlide = ({ videos }) => {
-  console.log({videos});
+  console.log({ videos });
   return (
     <NavigationSwiper>
       {videos.map((video, i) => (
@@ -36,7 +36,7 @@ const MediaVideosSlide = ({ videos }) => {
         </SwiperSlide>
       ))}
     </NavigationSwiper>
-  )
+  );
 };
 
 export default MediaVideosSlide;
