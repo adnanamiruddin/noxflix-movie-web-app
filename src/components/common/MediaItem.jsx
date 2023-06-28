@@ -65,11 +65,11 @@ const MediaItem = ({ media, mediaType }) => {
           <div>
             {favoriteUtils.check({ listFavorites, mediaId: media.id }) ? (
               <FavoriteIcon
-                color="primary"
+                color="error"
                 sx={{
                   position: "absolute",
-                  top: 2,
-                  right: 2,
+                  top: 3,
+                  right: 3,
                   fontSize: "2rem",
                 }}
               />
@@ -149,10 +149,12 @@ const MediaItem = ({ media, mediaType }) => {
               padding: "10px",
               position: "absolute",
               bottom: 0,
-              backgroundColor: "rgba(0, 0, 0, 7)"
+              backgroundColor: "rgba(0, 0, 0, 7)",
             }}
           >
-            <Typography sx={{...uiConfigs.style.typoLines(1, "left")}}>{media.name}</Typography>
+            <Typography sx={{ ...uiConfigs.style.typoLines(1, "left") }}>
+              {media.name}
+            </Typography>
           </Box>
         ) : (
           ""

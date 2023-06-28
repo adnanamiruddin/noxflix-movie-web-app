@@ -50,6 +50,34 @@ const MediaDetail = () => {
     getMedia();
   }, [mediaType, mediaId, dispatch]);
 
+  const handleAddFavoriteClick = async () => {
+    if (!user) return dispatch(setAuthModalOpen(true));
+
+    if (onRequest) return;
+
+    if (isFavorite) {
+      return;
+    }
+
+    setOnRequest(true);
+      const body = {
+        mediaId,
+        mediaType,
+        mediaTitle: media.title || media.name,
+        mediaPoster: media.poster_path,
+        mediaRate: media.vote_average,
+      };
+      const { response, error } = await favoriteApi.add(body);
+      setOnRequest(false);
+
+      if (response) {
+        dispatch(addFavorite(response));
+        setIsFavorite(true);
+        toast.success("Successfully Added to Favorites");
+      }
+      if (error) toast.error(error.message);
+  };
+
   return media ? (
     <div>
       {/* Media's Backdrop/Background Image START */}
@@ -169,6 +197,7 @@ const MediaDetail = () => {
                     }
                     loadingPosition="start"
                     loading={onRequest}
+                    onClick={handleAddFavoriteClick}
                   />
                   {/* Media's 'Favorite' Button END */}
 
