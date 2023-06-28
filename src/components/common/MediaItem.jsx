@@ -139,6 +139,25 @@ const MediaItem = ({ media, mediaType }) => {
           ""
         )}
         {/* Hover Styling only for Movie or TV item END */}
+
+        {/* Styling for People START */}
+        {mediaType === "people" ? (
+          <Box
+            sx={{
+              width: "100%",
+              height: "max-content",
+              padding: "10px",
+              position: "absolute",
+              bottom: 0,
+              backgroundColor: "rgba(0, 0, 0, 7)"
+            }}
+          >
+            <Typography sx={{...uiConfigs.style.typoLines(1, "left")}}>{media.name}</Typography>
+          </Box>
+        ) : (
+          ""
+        )}
+        {/* Styling for People END */}
       </Box>
     </Link>
   );
