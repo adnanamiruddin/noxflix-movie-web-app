@@ -97,8 +97,6 @@ const MediaReviews = ({ media, mediaType, reviews }) => {
   const [listReviews, setListReviews] = useState([]);
   const [filteredReviews, setFilteredReviews] = useState([]);
 
-
-  
   useEffect(() => {
     setListReviews([...reviews]);
     setFilteredReviews([...reviews].splice(0, initialValueReviews));
