@@ -88,7 +88,7 @@ const ReviewItem = ({ review, onRemoved }) => {
 const MediaReviews = ({ media, mediaType, reviews }) => {
   const { user } = useSelector((state) => state.user);
 
-  const initialCountToShow = ;
+  const initialCountToShow = 5;
 
   const [onRequest, setOnRequest] = useState(false);
   const [content, setContent] = useState("");

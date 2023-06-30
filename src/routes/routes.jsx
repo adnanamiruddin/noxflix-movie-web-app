@@ -25,6 +25,14 @@ const routes = [
     state: "home",
   },
   {
+    path: "/:mediaType/:mediaId",
+    element: <MediaDetail />,
+  },
+  {
+    path: "/:mediaType",
+    element: <MediaList />,
+  },
+  {
     path: "/search",
     element: <MediaSearch />,
     state: "search",
@@ -60,14 +68,6 @@ const routes = [
       </ProtectedPage>
     ),
     state: "reviews",
-  },
-  {
-    path: "/:mediaType",
-    element: <MediaList />,
-  },
-  {
-    path: "/:mediaType/:mediaId",
-    element: <MediaDetail />,
   },
 ];
 
