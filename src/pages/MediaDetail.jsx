@@ -23,6 +23,7 @@ import BackdropsSlide from "../components/common/BackdropsSlide";
 import PostersSlide from "../components/common/PostersSlide";
 import RecommendationsSlide from "../components/common/RecommendationsSlide";
 import MediaSlide from "../components/common/MediaSlide";
+import MediaReviews from "../components/common/MediaReviews";
 
 const MediaDetail = () => {
   const { user, listFavorites } = useSelector((state) => state.user);
@@ -287,10 +288,15 @@ const MediaDetail = () => {
         {/* Media's Backdrops/Images/Photos END */}
 
         {/* Media's Reviews START */}
+        <MediaReviews
+          media={media}
+          mediaType={mediaType}
+          reviews={media.reviews}
+        />
         {/* Media's Reviews END */}
 
         {/* Media's Recommendation START */}
-        <Container header="You might like this">
+        <Container header="You might like these">
           {media.recommendations.length > 0 ? (
             <RecommendationsSlide
               medias={media.recommendations}
