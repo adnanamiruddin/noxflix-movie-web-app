@@ -27,7 +27,6 @@ const MediaVideo = ({ video }) => {
 };
 
 const MediaVideosSlide = ({ videos }) => {
-  console.log({ videos });
   return (
     <NavigationSwiper>
       {videos.map((video, i) => (

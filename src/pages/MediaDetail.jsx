@@ -21,6 +21,8 @@ import CastSlide from "../components/common/CastSlide";
 import MediaVideosSlide from "../components/common/MediaVideosSlide";
 import BackdropsSlide from "../components/common/BackdropsSlide";
 import PostersSlide from "../components/common/PostersSlide";
+import RecommendationsSlide from "../components/common/RecommendationsSlide";
+import MediaSlide from "../components/common/MediaSlide";
 
 const MediaDetail = () => {
   const { user, listFavorites } = useSelector((state) => state.user);
@@ -45,7 +47,7 @@ const MediaDetail = () => {
       if (response) {
         setMedia(response);
         setIsFavorite(response.isFavorite);
-        setGenres(response.genres.splice(0, 3));
+        setGenres(response.genres.splice(0, 5));
       }
       if (error) toast.error(error.message);
       dispatch(setGlobalLoading(false));
@@ -258,22 +260,6 @@ const MediaDetail = () => {
         </div>
         {/* Media's Videos END */}
 
-        {/* Media's Backdrops/Images START */}
-        {media.images.backdrops.length > 0 ? (
-          <Container
-            header={
-              mediaType === tmdbConfigs.mediaType.movie
-                ? "Movie Backdrops"
-                : "TV Series Backdrops"
-            }
-          >
-            <BackdropsSlide backdrops={media.images.backdrops} />
-          </Container>
-        ) : (
-          ""
-        )}
-        {/* Media's Backdrops/Images END */}
-
         {/* Media's Posters START */}
         {media.images.posters.length > 0 ? (
           <Container header="Posters">
@@ -283,6 +269,35 @@ const MediaDetail = () => {
           ""
         )}
         {/* Media's Posters END */}
+
+        {/* Media's Backdrops/Images/Photos START */}
+        {media.images.backdrops.length > 0 ? (
+          <Container
+            header={
+              mediaType === tmdbConfigs.mediaType.movie
+                ? "Movie Photos"
+                : "TV Series Photos"
+            }
+          >
+            <BackdropsSlide backdrops={media.images.backdrops} />
+          </Container>
+        ) : (
+          ""
+        )}
+        {/* Media's Backdrops/Images/Photos END */}
+
+        {/* Media's Recommendation START */}
+        {media.recommendations.length > 0 ? (
+          <Container header="You might like this">
+            <RecommendationsSlide
+              medias={media.recommendations}
+              mediaType={mediaType}
+            />
+          </Container>
+        ) : (
+          ""
+        )}
+        {/* Media's Recommendation END */}
       </Box>
     </div>
   ) : null;
