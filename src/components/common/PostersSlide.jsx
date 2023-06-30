@@ -6,7 +6,7 @@ import AutoSwiper from "./AutoSwiper";
 const PostersSlide = ({ posters }) => {
   return (
     <AutoSwiper>
-      {posters.splice(0, 10).map((item, i) => (
+      {[...posters].splice(0, 10).map((item, i) => (
         <SwiperSlide key={i}>
           <Box
             sx={{
