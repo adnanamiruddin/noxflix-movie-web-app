@@ -1,8 +1,8 @@
-import { SwiperSlide } from "swiper/react"
-import AutoSwiper from "./AutoSwiper"
-import MediaItem from "./MediaItem"
+import { SwiperSlide } from "swiper/react";
+import AutoSwiper from "./AutoSwiper";
+import MediaItem from "./MediaItem";
 
-const RecommendationsSlide = ({medias, mediaType}) => {
+const RecommendationsSlide = ({ medias, mediaType }) => {
   return (
     <AutoSwiper>
       {medias.map((media, i) => (
@@ -11,7 +11,7 @@ const RecommendationsSlide = ({medias, mediaType}) => {
         </SwiperSlide>
       ))}
     </AutoSwiper>
-  )
-}
+  );
+};
 
-export default RecommendationsSlide
+export default RecommendationsSlide;

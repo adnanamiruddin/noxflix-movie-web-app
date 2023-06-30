@@ -286,6 +286,9 @@ const MediaDetail = () => {
         )}
         {/* Media's Backdrops/Images/Photos END */}
 
+        {/* Media's Reviews START */}
+        {/* Media's Reviews END */}
+
         {/* Media's Recommendation START */}
         <Container header="You might like this">
           {media.recommendations.length > 0 ? (
