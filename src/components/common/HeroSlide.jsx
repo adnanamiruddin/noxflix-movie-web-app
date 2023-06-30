@@ -151,7 +151,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
 
                     <Divider orientation="vertical" />
                     {/* Movie's Genre START */}
-                    {[...movie.genre_ids].splice(0, 3).map((genreId, i) => (
+                    {[...movie.genre_ids].splice(0, 2).map((genreId, i) => (
                       <Chip
                         key={i}
                         variant="filled"
@@ -183,6 +183,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                     LinkComponent={Link}
                     to={routesGen.mediaDetail(mediaType, movie.id)}
                     sx={{ width: "max-content" }}
+                    color="error"
                   >
                     Watch Now!
                   </Button>
