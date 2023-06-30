@@ -88,7 +88,7 @@ const ReviewItem = ({ review, onRemoved }) => {
 const MediaReviews = ({ media, mediaType, reviews }) => {
   const { user } = useSelector((state) => state.user);
 
-  const initialValueReviews = 4;
+  const initialCountToShow = ;
 
   const [onRequest, setOnRequest] = useState(false);
   const [content, setContent] = useState("");
@@ -99,7 +99,7 @@ const MediaReviews = ({ media, mediaType, reviews }) => {
 
   useEffect(() => {
     setListReviews([...reviews]);
-    setFilteredReviews([...reviews].splice(0, initialValueReviews));
+    setFilteredReviews([...reviews].splice(0, initialCountToShow));
     setReviewCount(reviews.length);
   }, [reviews]);
 
@@ -131,8 +131,8 @@ const MediaReviews = ({ media, mediaType, reviews }) => {
     setFilteredReviews([
       ...filteredReviews,
       ...[...listReviews].splice(
-        page * initialValueReviews,
-        initialValueReviews
+        page * initialCountToShow,
+        initialCountToShow
       ),
     ]);
   };
@@ -142,7 +142,7 @@ const MediaReviews = ({ media, mediaType, reviews }) => {
       const newListReviews = [...listReviews].filter((e) => e.id !== id);
       setListReviews(newListReviews);
       setFilteredReviews(
-        [...newListReviews].splice(0, page * initialValueReviews)
+        [...newListReviews].splice(0, page * initialCountToShow)
       );
     } else {
       setFilteredReviews([...filteredReviews].filter((e) => e.id !== id));
