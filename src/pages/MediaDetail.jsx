@@ -287,16 +287,21 @@ const MediaDetail = () => {
         {/* Media's Backdrops/Images/Photos END */}
 
         {/* Media's Recommendation START */}
-        {media.recommendations.length > 0 ? (
-          <Container header="You might like this">
+        <Container header="You might like this">
+          {media.recommendations.length > 0 ? (
             <RecommendationsSlide
               medias={media.recommendations}
               mediaType={mediaType}
             />
-          </Container>
-        ) : (
-          ""
-        )}
+          ) : media.recommendations.length === 0 ? (
+            <MediaSlide
+              mediaCategory={tmdbConfigs.mediaCategory.popular}
+              mediaType={mediaType}
+            />
+          ) : (
+            ""
+          )}
+        </Container>
         {/* Media's Recommendation END */}
       </Box>
     </div>
