@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { setAppState } from "../redux/features/appStateSlice";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
-import usePrevious from "../hooks/usePrevious";
 import { LoadingButton } from "@mui/lab";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
@@ -16,7 +15,6 @@ import MediaGrid from "../components/common/MediaGrid";
 const MediaList = () => {
   const { mediaType } = useParams();
 
-  const prevMediaType = usePrevious(mediaType);
   const dispatch = useDispatch();
 
   const [medias, setMedias] = useState([]);
@@ -55,16 +53,10 @@ const MediaList = () => {
       if (error) toast.error(error.message);
     };
 
-    if (mediaType !== prevMediaType) {
-      setCurrentCategory(0);
-      setCurrentPage(1);
-    }
-
     getMedias();
   }, [
     mediaType,
     currentCategory,
-    prevMediaType,
     currentPage,
     mediaCategories,
     dispatch,
@@ -125,9 +117,18 @@ const MediaList = () => {
         </Stack>
         <MediaGrid medias={medias} mediaType={mediaType} />
         <LoadingButton
-          fullWidth
           color="primary"
-          sx={{ marginTop: 8 }}
+          sx={{
+            width: "70%",
+            height: "2.5rem",
+            marginTop: 8,
+            marginLeft: "15%",
+            fontWeight: "600",
+            "&:hover": {
+              backgroundColor: "secondary.main",
+              color: "primary.contrastText",
+            },
+          }}
           loading={mediaLoading}
           onClick={handleLoadMoreMedias}
         >
