@@ -27,7 +27,7 @@ const FavoriteItem = ({ media, onRemoved }) => {
     if (response) {
       dispatch(removeFavorite({ mediaId: media.mediaId }));
       onRemoved(media.id);
-      toast.success("Successfully Remove Favorite")
+      toast.success("Successfully remove favorite")
     }
     if (error) toast.error(error.message);
   };
@@ -75,7 +75,7 @@ const FavoriteList = () => {
     };
 
     getFavorites();
-  }, [dispatch]);
+  }, []);
 
   const handleLoadMoreFavorites = () => {
     setFilteredMedias([
@@ -98,8 +98,8 @@ const FavoriteList = () => {
     <Box sx={{ ...uiConfigs.style.mainContent }}>
       <Container header={`Your Favorites Media (${favoritesCount})`}>
         <Grid container spacing={1} sx={{ marginRight: "-8px !important" }}>
-          {filteredMedias.map((media, i) => (
-            <Grid key={i} item xs={6} sm={4} md={3}>
+          {filteredMedias.map((media) => (
+            <Grid key={media.id} item xs={6} sm={4} md={3}>
               <FavoriteItem media={media} onRemoved={onRemoved} />
             </Grid>
           ))}
