@@ -9,6 +9,7 @@ import uiConfigs from "../configs/ui.configs";
 import tmdbConfigs from "../api/configs/tmdb.configs";
 import Container from "../components/common/Container";
 import PersonMediaGrid from "../components/common/PersonMediaGrid";
+import PostersSlide from "../components/common/PostersSlide";
 
 const PersonDetail = () => {
   const { personId } = useParams();
@@ -82,6 +83,12 @@ const PersonDetail = () => {
                 </Stack>
               </Box>
             </Box>
+
+            {/* Person's Photos START */}
+            <Container header={`${person.name}'s Photos`}>
+              <PostersSlide posters={person.images.profiles} />
+            </Container>
+            {/* Person's Photos END */}
 
             {/* Person's Medias START */}
             <Container header={`${person.name}'s Medias`}>
