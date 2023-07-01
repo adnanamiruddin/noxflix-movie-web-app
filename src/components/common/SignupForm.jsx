@@ -15,7 +15,7 @@ const SignupForm = ({ switchAuthState }) => {
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
-  const signinForm = useFormik({
+  const signunForm = useFormik({
     initialValues: {
       username: "",
       displayName: "",
@@ -24,17 +24,21 @@ const SignupForm = ({ switchAuthState }) => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(8, "Minimum 8 characters for username")
+        .min(8, "Minimum 8 characters for user name")
         .required("Username is required!"),
       displayName: Yup.string()
-        .min(8, "Display Name 8 characters for Password")
-        .required("Display Name is required!"),
+        .min(8, "Minimum 8 characters for display name")
+        .required("Display name is required!"),
       password: Yup.string()
-        .min(8, "Minimum 8 characters for Password")
+        .min(8, "Minimum 8 characters for password")
         .required("Password is required!"),
       confirmPassword: Yup.string()
-        .min(8, "Minimum 8 characters for Confirm Password")
-        .required("Confirm Password is required!"),
+        .oneOf(
+          [Yup.ref("password")],
+          "Confirm password does not match with your password"
+        )
+        .min(8, "Minimum 8 characters for confirm password")
+        .required("Confirm password is required!"),
     }),
     onSubmit: async (values) => {
       setErrorMessage(undefined);
@@ -43,7 +47,7 @@ const SignupForm = ({ switchAuthState }) => {
       setIsLoginRequest(false);
 
       if (response) {
-        signinForm.resetForm();
+        signunForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
@@ -54,62 +58,67 @@ const SignupForm = ({ switchAuthState }) => {
   });
 
   return (
-    <Box component="form" onSubmit={signinForm.handleSubmit}>
+    <Box component="form" onSubmit={signunForm.handleSubmit}>
       <Stack spacing={3}>
         <TextField
           type="text"
           placeholder="username..."
           name="username"
-          value={signinForm.values.username}
+          value={signunForm.values.username}
           fullWidth
           color="success"
-          onChange={signinForm.handleChange}
-          helperText={signinForm.touched.username && signinForm.errors.username}
+          onChange={signunForm.handleChange}
+          helperText={signunForm.touched.username && signunForm.errors.username}
           error={
-            signinForm.touched.username &&
-            signinForm.errors.username !== undefined
+            signunForm.touched.username &&
+            signunForm.errors.username !== undefined
           }
         />
         <TextField
           type="text"
           placeholder="nickname..."
           name="displayName"
-          value={signinForm.values.displayName}
+          value={signunForm.values.displayName}
           fullWidth
           color="success"
-          onChange={signinForm.handleChange}
-          helperText={signinForm.touched.displayName && signinForm.errors.displayName}
+          onChange={signunForm.handleChange}
+          helperText={
+            signunForm.touched.displayName && signunForm.errors.displayName
+          }
           error={
-            signinForm.touched.displayName &&
-            signinForm.errors.displayName !== undefined
+            signunForm.touched.displayName &&
+            signunForm.errors.displayName !== undefined
           }
         />
         <TextField
           type="password"
           placeholder="password..."
           name="password"
-          value={signinForm.values.password}
+          value={signunForm.values.password}
           fullWidth
           color="success"
-          onChange={signinForm.handleChange}
-          helperText={signinForm.touched.password && signinForm.errors.password}
+          onChange={signunForm.handleChange}
+          helperText={signunForm.touched.password && signunForm.errors.password}
           error={
-            signinForm.touched.password &&
-            signinForm.errors.password !== undefined
+            signunForm.touched.password &&
+            signunForm.errors.password !== undefined
           }
         />
         <TextField
           type="password"
           placeholder="confirm password..."
           name="confirmPassword"
-          value={signinForm.values.confirmPassword}
+          value={signunForm.values.confirmPassword}
           fullWidth
           color="success"
-          onChange={signinForm.handleChange}
-          helperText={signinForm.touched.confirmPassword && signinForm.errors.confirmPassword}
+          onChange={signunForm.handleChange}
+          helperText={
+            signunForm.touched.confirmPassword &&
+            signunForm.errors.confirmPassword
+          }
           error={
-            signinForm.touched.confirmPassword &&
-            signinForm.errors.confirmPassword !== undefined
+            signunForm.touched.confirmPassword &&
+            signunForm.errors.confirmPassword !== undefined
           }
         />
       </Stack>
