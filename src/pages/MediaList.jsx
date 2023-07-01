@@ -23,10 +23,22 @@ const MediaList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const mediaCategories = useMemo(
-    () => ["popular", "top_rated", "now_playing", "on_the_air"],
-    []
+    () => [
+      "popular",
+      "top_rated",
+      `${
+        mediaType === tmdbConfigs.mediaType.movie ? "now_playing" : "on_the_air"
+      }`,
+    ],
+    [mediaType]
   );
-  const categories = ["popular", "top_rated", "now_playing", "on_the_air"];
+  const categories = [
+    "popular",
+    "top_rated",
+    `${
+      mediaType === tmdbConfigs.mediaType.movie ? "now_playing" : "on_the_air"
+    }`,
+  ];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -54,13 +66,7 @@ const MediaList = () => {
     };
 
     getMedias();
-  }, [
-    mediaType,
-    currentCategory,
-    currentPage,
-    mediaCategories,
-    dispatch,
-  ]);
+  }, [mediaType, currentCategory, currentPage, mediaCategories, dispatch]);
 
   const handleCategoryChange = (categoryIndex) => {
     if (currentCategory === categoryIndex) return;
@@ -89,30 +95,22 @@ const MediaList = () => {
             {mediaType === tmdbConfigs.mediaType.movie ? "Movies" : "TV Series"}
           </Typography>
           <Stack direction="row" spacing={2}>
-            {categories
-              .filter(
-                (category) =>
-                  category !==
-                  (mediaType === tmdbConfigs.mediaType.movie
-                    ? "on_the_air"
-                    : "now_playing")
-              )
-              .map((category, i) => (
-                <Button
-                  key={i}
-                  variant={currentCategory === i ? "contained" : "text"}
-                  size="large"
-                  sx={{
-                    color:
-                      currentCategory === i
-                        ? "primary.contrastText"
-                        : "text.primary",
-                  }}
-                  onClick={() => handleCategoryChange(i)}
-                >
-                  {category.replace(/_/g, " ")}
-                </Button>
-              ))}
+            {categories.map((category, i) => (
+              <Button
+                key={i}
+                variant={currentCategory === i ? "contained" : "text"}
+                size="large"
+                sx={{
+                  color:
+                    currentCategory === i
+                      ? "primary.contrastText"
+                      : "text.primary",
+                }}
+                onClick={() => handleCategoryChange(i)}
+              >
+                {category.replace(/_/g, " ")}
+              </Button>
+            ))}
           </Stack>
         </Stack>
         <MediaGrid medias={medias} mediaType={mediaType} />
