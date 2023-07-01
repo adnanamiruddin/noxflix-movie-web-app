@@ -34,6 +34,7 @@ const ReviewItem = ({ review, onRemoved }) => {
   return (
     <Box
       sx={{
+        marginBottom: 3,
         padding: 1,
         position: "relative",
         display: "flex",
@@ -87,6 +88,7 @@ const ReviewItem = ({ review, onRemoved }) => {
 
       <LoadingButton
         variant="contained"
+        color="error"
         sx={{
           width: "max-content",
           marginTop: { xs: 2, md: 0 },

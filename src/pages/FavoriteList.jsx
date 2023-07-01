@@ -27,7 +27,7 @@ const FavoriteItem = ({ media, onRemoved }) => {
     if (response) {
       dispatch(removeFavorite({ mediaId: media.mediaId }));
       onRemoved(media.id);
-      toast.success("Successfully remove favorite")
+      toast.success("Successfully remove favorite");
     }
     if (error) toast.error(error.message);
   };
@@ -38,7 +38,8 @@ const FavoriteItem = ({ media, onRemoved }) => {
       <LoadingButton
         fullWidth
         variant="contained"
-        sx={{ marginTop: 2 }}
+        color="error"
+        sx={{ marginTop: 2, marginBottom: 3 }}
         startIcon={<DeleteIcon />}
         loading={onRequest}
         loadingPosition="start"
