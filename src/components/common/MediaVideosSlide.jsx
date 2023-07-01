@@ -10,7 +10,7 @@ const MediaVideo = ({ video }) => {
   useEffect(() => {
     const height = (iframeRef.current.offsetWidth * 9) / 16 + "px";
     iframeRef.current.setAttribute("height", height);
-  }, []);
+  }, [video]);
 
   return (
     <Box sx={{ height: "max-content" }}>
