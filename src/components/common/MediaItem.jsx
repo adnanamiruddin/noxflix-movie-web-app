@@ -53,8 +53,9 @@ const MediaItem = ({ media, mediaType }) => {
     >
       <Box
         sx={{
-          ...uiConfigs.style.backgroundImage(posterPath),
+          marginRight: 0.5,
           paddingTop: "160%",
+          ...uiConfigs.style.backgroundImage(posterPath),
           color: "primary.contrastText",
           "&:hover .media-info": { bottom: 0, opacity: 1 },
           "&:hover .media-back-drop, &:hover .media-play-btn": { opacity: 1 },
