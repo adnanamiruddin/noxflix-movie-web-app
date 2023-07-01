@@ -18,13 +18,15 @@ const PersonMediaGrid = ({ personId }) => {
 
       if (response) {
         const mediasSorted = response.cast.sort(
-          (a, b) => getReleaseDate(b) - getReleaseDate(a)
+          (oldest, newest) => getReleaseDate(newest) - getReleaseDate(oldest)
         );
         setMedias([...mediasSorted]);
         setFilteredMedias([...mediasSorted].splice(0, initialCountToShow));
       }
       if (error) toast.error(error.message);
     };
+
+    getMedias();
   }, [personId]);
 
   const getReleaseDate = (media) => {
@@ -38,7 +40,7 @@ const PersonMediaGrid = ({ personId }) => {
   const handleLoadMoreMedias = () => {
     setFilteredMedias([
       ...filteredMedias,
-      ...[...medias].splice(page * initialCountToShow, page),
+      ...[...medias].splice(page * initialCountToShow, initialCountToShow),
     ]);
     setPage(page + 1);
   };
@@ -46,17 +48,32 @@ const PersonMediaGrid = ({ personId }) => {
   return (
     <div>
       <Grid container spacing={1} sx={{ marginRight: "-8px !important" }}>
-        {medias.map((media, i) => (
+        {filteredMedias.map((media, i) => (
           <Grid key={i} item xs={6} sm={4} md={3}>
             <MediaItem media={media} mediaType={media.media_type} />
           </Grid>
         ))}
       </Grid>
       {filteredMedias.length < medias.length ? (
-        <Button onClick={handleLoadMoreMedias}>
+        <Button
+          sx={{
+            width: "70%",
+            height: "2.5rem",
+            marginTop: 8,
+            marginLeft: "15%",
+            fontWeight: "600",
+            "&:hover": {
+              backgroundColor: "secondary.main",
+              color: "primary.contrastText",
+            },
+          }}
+          onClick={handleLoadMoreMedias}
+        >
           Load More
         </Button>
-      ) : ""}
+      ) : (
+        ""
+      )}
     </div>
   );
 };
