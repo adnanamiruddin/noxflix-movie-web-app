@@ -5,7 +5,7 @@ const Logo = () => {
 
   return (
     <Typography fontWeight="700" fontSize="1.7rem" fontStyle="italic">
-      Noxlack
+      Nox
       <span
         style={{
           color: theme.palette.primary.main,
@@ -13,7 +13,7 @@ const Logo = () => {
           fontSize: "103%",
         }}
       >
-        Movie
+        Flix
       </span>
     </Typography>
   );

@@ -97,7 +97,7 @@ const Headerbar = () => {
               alignItems="center"
               display={{ xs: "none", md: "flex" }}
             >
-              <Box sx={{ marginRight: "30px" }}>
+              <Box sx={{ marginRight: "35px" }}>
                 <Logo />
               </Box>
               {menuConfigs.main.map((menu, i) => (
