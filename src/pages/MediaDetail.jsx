@@ -2,7 +2,16 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoadingButton } from "@mui/lab";
-import { Box, Button, Chip, Divider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Chip,
+  Divider,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -31,6 +40,9 @@ const MediaDetail = () => {
 
   const dispatch = useDispatch();
   const videoRef = useRef(null);
+
+  const theme = useTheme();
+  const isXsScreen = useMediaQuery(theme.breakpoints.only("xs"));
 
   const [media, setMedia] = useState();
   const [genres, setGenres] = useState([]);
@@ -188,14 +200,16 @@ const MediaDetail = () => {
                   <Divider orientation="vertical" />
 
                   {/* Media's Genres START */}
-                  {genres.map((genre, i) => (
-                    <Chip
-                      key={i}
-                      label={genre.name}
-                      variant="filled"
-                      color="primary"
-                    />
-                  ))}
+                  {genres
+                    .splice(0, isXsScreen ? 3 : genres.length)
+                    .map((genre, i) => (
+                      <Chip
+                        key={i}
+                        label={genre.name}
+                        variant="filled"
+                        color="primary"
+                      />
+                    ))}
                   {/* Media's Genres END */}
                 </Stack>
                 {/* Media's Rating and Genres END */}
