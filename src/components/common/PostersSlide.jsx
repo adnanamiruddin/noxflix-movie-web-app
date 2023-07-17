@@ -6,13 +6,13 @@ import AutoSwiper from "./AutoSwiper";
 const PostersSlide = ({ posters }) => {
   return (
     <AutoSwiper>
-      {[...posters].splice(0, 10).map((item, i) => (
+      {[...posters].splice(0, 10).map((poster, i) => (
         <SwiperSlide key={i}>
           <Box
             sx={{
               paddingTop: "160%",
               // CONTENT IMAGE
-              backgroundImage: `url(${tmdbConfigs.posterPath(item.file_path)})`,
+              backgroundImage: `url(${tmdbConfigs.posterPath(poster.file_path)})`,
               backgroundPosition: "center",
               backgroundSize: "cover",
               marginRight: 0.5,

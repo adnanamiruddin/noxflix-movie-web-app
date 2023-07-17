@@ -107,7 +107,7 @@ const Headerbar = () => {
                     color: appState.includes(menu.state)
                       ? "primary.contrastText"
                       : "inherit",
-                    mr: 2,
+                    marginRight: 2,
                   }}
                   LinkComponent={Link}
                   to={menu.path}

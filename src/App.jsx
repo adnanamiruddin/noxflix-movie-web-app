@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import CssBaseline from "@mui/material/CssBaseline";
-import "swiper/css"
-import "swiper/css/navigation"
-import "swiper/css/pagination"
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import MainLayout from "./components/layout/MainLayout";
 import PageWrapper from "./components/common/PageWrapper";
 import themeConfigs from "./configs/theme.configs";

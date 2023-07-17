@@ -15,7 +15,7 @@ const SignupForm = ({ switchAuthState }) => {
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
-  const signunForm = useFormik({
+  const signupForm = useFormik({
     initialValues: {
       username: "",
       displayName: "",
@@ -47,10 +47,10 @@ const SignupForm = ({ switchAuthState }) => {
       setIsLoginRequest(false);
 
       if (response) {
-        signunForm.resetForm();
+        signupForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success("Sign in success");
+        toast.success("Sign up success");
       }
 
       if (error) setErrorMessage(error.message);
@@ -58,67 +58,67 @@ const SignupForm = ({ switchAuthState }) => {
   });
 
   return (
-    <Box component="form" onSubmit={signunForm.handleSubmit}>
+    <Box component="form" onSubmit={signupForm.handleSubmit}>
       <Stack spacing={3}>
         <TextField
           type="text"
           placeholder="username..."
           name="username"
-          value={signunForm.values.username}
+          value={signupForm.values.username}
           fullWidth
           color="success"
-          onChange={signunForm.handleChange}
-          helperText={signunForm.touched.username && signunForm.errors.username}
+          onChange={signupForm.handleChange}
+          helperText={signupForm.touched.username && signupForm.errors.username}
           error={
-            signunForm.touched.username &&
-            signunForm.errors.username !== undefined
+            signupForm.touched.username &&
+            signupForm.errors.username !== undefined
           }
         />
         <TextField
           type="text"
           placeholder="nickname..."
           name="displayName"
-          value={signunForm.values.displayName}
+          value={signupForm.values.displayName}
           fullWidth
           color="success"
-          onChange={signunForm.handleChange}
+          onChange={signupForm.handleChange}
           helperText={
-            signunForm.touched.displayName && signunForm.errors.displayName
+            signupForm.touched.displayName && signupForm.errors.displayName
           }
           error={
-            signunForm.touched.displayName &&
-            signunForm.errors.displayName !== undefined
+            signupForm.touched.displayName &&
+            signupForm.errors.displayName !== undefined
           }
         />
         <TextField
           type="password"
           placeholder="password..."
           name="password"
-          value={signunForm.values.password}
+          value={signupForm.values.password}
           fullWidth
           color="success"
-          onChange={signunForm.handleChange}
-          helperText={signunForm.touched.password && signunForm.errors.password}
+          onChange={signupForm.handleChange}
+          helperText={signupForm.touched.password && signupForm.errors.password}
           error={
-            signunForm.touched.password &&
-            signunForm.errors.password !== undefined
+            signupForm.touched.password &&
+            signupForm.errors.password !== undefined
           }
         />
         <TextField
           type="password"
           placeholder="confirm password..."
           name="confirmPassword"
-          value={signunForm.values.confirmPassword}
+          value={signupForm.values.confirmPassword}
           fullWidth
           color="success"
-          onChange={signunForm.handleChange}
+          onChange={signupForm.handleChange}
           helperText={
-            signunForm.touched.confirmPassword &&
-            signunForm.errors.confirmPassword
+            signupForm.touched.confirmPassword &&
+            signupForm.errors.confirmPassword
           }
           error={
-            signunForm.touched.confirmPassword &&
-            signunForm.errors.confirmPassword !== undefined
+            signupForm.touched.confirmPassword &&
+            signupForm.errors.confirmPassword !== undefined
           }
         />
       </Stack>

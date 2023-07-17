@@ -104,6 +104,12 @@ const MediaDetail = () => {
     if (error) toast.error(error.message);
   };
 
+  const handleButtonWatchNowClick = () => {
+    videoRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return media ? (
     <div>
       {/* Media's Backdrop/Background Image START */}
@@ -233,7 +239,7 @@ const MediaDetail = () => {
                     size="large"
                     sx={{ width: "max-content" }}
                     startIcon={<PlayArrowIcon />}
-                    onClick={() => videoRef.current.scrollIntoView()}
+                    onClick={handleButtonWatchNowClick}
                   >
                     Watch Now!
                   </Button>
