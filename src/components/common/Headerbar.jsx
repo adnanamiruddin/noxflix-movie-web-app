@@ -73,7 +73,11 @@ const Headerbar = () => {
       <ScrollAppBar>
         <AppBar elevation={0} sx={{ zIndex: 9999 }}>
           <Toolbar
-            sx={{ alignItems: "center", justifyContent: "space-between", marginTop: "5px" }}
+            sx={{
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginTop: "5px",
+            }}
           >
             <Stack direction="row" spacing={1} alignItems="center">
               {/* Mobile View (Hamburger Icon) START */}
@@ -124,19 +128,19 @@ const Headerbar = () => {
             {/* Main Menu Section END */}
 
             {/* User Menu Section START */}
-            {/* If User Already Sign In START */}
-            {user && <UserMenu />}
-            {/* If User Already Sign In END */}
-
             {/* If User Haven't Sign In START */}
             <Stack spacing={3} direction="row" alignItems="center">
-              {!user && (
+              {!user ? (
                 <Button
                   variant="contained"
                   onClick={() => dispatch(setAuthModalOpen(true))}
                 >
                   Sign In
                 </Button>
+              ) : (
+                // If User Already Sign In START
+                <UserMenu />
+                // If User Already Sign In END
               )}
             </Stack>
             {/* If User Haven't Sign In END */}
