@@ -2,16 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoadingButton } from "@mui/lab";
-import {
-  Box,
-  Button,
-  Chip,
-  Divider,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Chip, Divider, Stack, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -41,9 +32,6 @@ const MediaDetail = () => {
   const dispatch = useDispatch();
   const videoRef = useRef(null);
 
-  const theme = useTheme();
-  const isXsScreen = useMediaQuery(theme.breakpoints.only("xs"));
-
   const [media, setMedia] = useState();
   const [genres, setGenres] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -60,7 +48,7 @@ const MediaDetail = () => {
       if (response) {
         setMedia(response);
         setIsFavorite(response.isFavorite);
-        setGenres(response.genres.splice(0, 5));
+        setGenres(response.genres.splice(0, 3));
       }
       if (error) toast.error(error.message);
       dispatch(setGlobalLoading(false));
@@ -120,7 +108,7 @@ const MediaDetail = () => {
     videoRef.current.scrollIntoView({
       behavior: "smooth",
     });
-  };
+  }
 
   return media ? (
     <div>
@@ -200,16 +188,14 @@ const MediaDetail = () => {
                   <Divider orientation="vertical" />
 
                   {/* Media's Genres START */}
-                  {genres
-                    .splice(0, isXsScreen ? 3 : genres.length)
-                    .map((genre, i) => (
-                      <Chip
-                        key={i}
-                        label={genre.name}
-                        variant="filled"
-                        color="primary"
-                      />
-                    ))}
+                  {genres.map((genre, i) => (
+                    <Chip
+                      key={i}
+                      label={genre.name}
+                      variant="filled"
+                      color="primary"
+                    />
+                  ))}
                   {/* Media's Genres END */}
                 </Stack>
                 {/* Media's Rating and Genres END */}

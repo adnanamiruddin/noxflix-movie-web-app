@@ -13,7 +13,7 @@ const Logo = () => {
           fontSize: "103%",
         }}
       >
-        Flix
+        Flick
       </span>
     </Typography>
   );
