@@ -68,10 +68,10 @@ const PersonDetail = () => {
                   {/* Person's Name and Birthday Year START */}
                   <Typography variant="h5" fontWeight="700">
                     {`${person.name} `}
-                    {person.birthday
-                      ? `(${person.birthday.split("-")[0]}`
+                    {person.birthday ? `(${person.birthday.split("-")[0]}` : ""}
+                    {person.deathday
+                      ? ` - ${person.deathday.split("-")[0]}`
                       : ""}
-                    {person.deathday ? ` - ${person.deathday.split("-")[0]}` : ""}
                     {person.birthday || person.deathday ? ")" : ""}
                     {/* {`${person.name} (${person.birthday.split("-")[0]}`}
                     {person.deathday

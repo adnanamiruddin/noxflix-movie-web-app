@@ -70,7 +70,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
           </ListItemButton>
         ))}
 
-        {user && (
+        {user ? (
           <div>
             <Typography variant="h6" marginBottom="10px" marginTop="20px">
               PERSONAL
@@ -101,6 +101,8 @@ const Sidebar = ({ open, toggleSidebar }) => {
               </ListItemButton>
             ))}
           </div>
+        ) : (
+          ""
         )}
 
         <Typography variant="h6" marginBottom="10px" marginTop="20px">

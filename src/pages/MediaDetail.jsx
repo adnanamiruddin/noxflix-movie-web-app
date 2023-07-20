@@ -108,7 +108,7 @@ const MediaDetail = () => {
     videoRef.current.scrollIntoView({
       behavior: "smooth",
     });
-  }
+  };
 
   return media ? (
     <div>

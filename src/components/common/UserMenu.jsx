@@ -23,7 +23,7 @@ const UserMenu = () => {
 
   return (
     <div>
-      {user && (
+      {user ? (
         <div>
           <Typography
             variant="h6"
@@ -33,7 +33,7 @@ const UserMenu = () => {
               marginTop: { xs: 0.5, md: 0 },
               marginLeft: { xs: 2.5, sm: 28, md: 0 },
               textAlign: "center",
-              fontSize: {xs: "1rem", sm: "1.5rem"},
+              fontSize: { xs: "1rem", sm: "1.5rem" },
             }}
             onClick={toggleMenu}
           >
@@ -77,6 +77,8 @@ const UserMenu = () => {
             </ListItemButton>
           </Menu>
         </div>
+      ) : (
+        ""
       )}
     </div>
   );

@@ -97,7 +97,7 @@ const MediaSearch = () => {
           {medias.length > 0 ? (
             <LoadingButton
               sx={{
-                width: {xs: "90%", md: "70%"},
+                width: { xs: "90%", md: "70%" },
                 height: "2.5rem",
                 fontWeight: "600",
                 alignSelf: "center",

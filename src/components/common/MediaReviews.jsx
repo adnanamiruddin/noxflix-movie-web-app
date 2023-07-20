@@ -61,7 +61,7 @@ const ReviewItem = ({ review, onRemoved }) => {
           <Typography variant="body1" textAlign="justify">
             {review.content}
           </Typography>
-          {user && user.id === review.user.id && (
+          {user && user.id === review.user.id ? (
             <LoadingButton
               variant="contained"
               startIcon={<DeleteIcon />}
@@ -77,6 +77,8 @@ const ReviewItem = ({ review, onRemoved }) => {
             >
               Remove
             </LoadingButton>
+          ) : (
+            ""
           )}
         </Stack>
         {/* User's Review END */}
@@ -130,10 +132,7 @@ const MediaReviews = ({ media, mediaType, reviews }) => {
     setPage(page + 1);
     setFilteredReviews([
       ...filteredReviews,
-      ...[...listReviews].splice(
-        page * initialCountToShow,
-        initialCountToShow
-      ),
+      ...[...listReviews].splice(page * initialCountToShow, initialCountToShow),
     ]);
   };
 
