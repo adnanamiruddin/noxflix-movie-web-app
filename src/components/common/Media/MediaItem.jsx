@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import tmdbConfigs from "../../api/configs/tmdb.configs";
-import uiConfigs from "../../configs/ui.configs";
-import { routesGen } from "../../routes/routes";
-import favoriteUtils from "../../utils/favorite.util";
+import tmdbConfigs from "../../../api/configs/tmdb.configs";
+import uiConfigs from "../../../configs/ui.configs";
+import { routesGen } from "../../../routes/routes";
+import favoriteUtils from "../../../utils/favorite.util";
 import { Button, Stack, Typography } from "@mui/material";
-import CircularRate from "./CircularRate";
+import CircularRate from "../Utils/CircularRate";
 
 const MediaItem = ({ media, mediaType }) => {
   const { listFavorites } = useSelector((state) => state.user);

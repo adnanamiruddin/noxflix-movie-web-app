@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import { LoadingButton } from "@mui/lab";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
-import Container from "../components/common/Container";
+import Container from "../components/common/Utils/Container";
 import { useDispatch } from "react-redux";
 
 const ReviewItem = ({ review, onRemoved }) => {

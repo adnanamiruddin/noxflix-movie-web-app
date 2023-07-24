@@ -1,7 +1,7 @@
 import { Box, Button, Paper, Stack } from "@mui/material";
-import Container from "./Container";
-import Logo from "./Logo";
-import menuConfigs from "../../configs/menu.configs"
+import Container from "../Utils/Container";
+import Logo from "../Global/Logo";
+import menuConfigs from "../../../configs/menu.configs"
 import { Link } from "react-router-dom";
 
 const Footer = () => {

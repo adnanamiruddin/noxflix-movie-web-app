@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
-import GlobalLoading from "../common/GlobalLoading";
-import Footer from "../common/Footer";
-import Headerbar from "../common/Headerbar";
-import AuthModal from "../common/AuthModal";
+import GlobalLoading from "../common/Global/GlobalLoading";
+import Footer from "../common/Global/Footer";
+import Headerbar from "../common/Global/Headerbar";
+import AuthModal from "../common/Auth/AuthModal";
 import { setListFavorites, setUser } from "../../redux/features/userSlice";
 import userApi from "../../api/modules/user.api";
 import favoriteApi from "../../api/modules/favorite.api";
@@ -30,12 +30,12 @@ const MainLayout = () => {
     const getFavorites = async () => {
       const { response, error } = await favoriteApi.getList();
 
-      if (response) dispatch(setListFavorites(response))
-      if (error) dispatch(error.message)
+      if (response) dispatch(setListFavorites(response));
+      if (error) dispatch(error.message);
     };
 
-    if (user) getFavorites()
-    if (!user) dispatch(setListFavorites([]))
+    if (user) getFavorites();
+    if (!user) dispatch(setListFavorites([]));
   }, [user, dispatch]);
 
   return (

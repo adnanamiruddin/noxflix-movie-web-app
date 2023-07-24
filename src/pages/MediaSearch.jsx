@@ -3,7 +3,7 @@ import mediaApi from "../api/modules/media.api";
 import { toast } from "react-toastify";
 import { Box, Button, Stack, TextField, Toolbar } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
-import MediaGrid from "../components/common/MediaGrid";
+import MediaGrid from "../components/common/Media/MediaGrid";
 import { LoadingButton } from "@mui/lab";
 
 const mediaTypes = ["movie", "tv", "people"];

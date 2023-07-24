@@ -13,10 +13,10 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import menuConfigs from "../../configs/menu.configs";
-import { themeModes } from "../../configs/theme.configs";
-import { setThemeMode } from "../../redux/features/themeModeSlice";
-import { setAuthModalOpen } from "../../redux/features/authModalSlice";
+import menuConfigs from "../../../configs/menu.configs";
+import { themeModes } from "../../../configs/theme.configs";
+import { setThemeMode } from "../../../redux/features/themeModeSlice";
+import { setAuthModalOpen } from "../../../redux/features/authModalSlice";
 import Logo from "./Logo";
 import UserMenu from "./UserMenu";
 import Sidebar from "./Sidebar";

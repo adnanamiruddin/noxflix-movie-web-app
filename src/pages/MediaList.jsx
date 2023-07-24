@@ -9,8 +9,8 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
 import mediaApi from "../api/modules/media.api";
 import tmdbConfigs from "../api/configs/tmdb.configs";
-import HeroSlide from "../components/common/HeroSlide";
-import MediaGrid from "../components/common/MediaGrid";
+import HeroSlide from "../components/common/Media/HeroSlide";
+import MediaGrid from "../components/common/Media/MediaGrid";
 
 const MediaList = () => {
   const { mediaType } = useParams();

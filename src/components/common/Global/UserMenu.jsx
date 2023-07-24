@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import menuConfigs from "../../configs/menu.configs";
-import { setUser } from "../../redux/features/userSlice";
+import menuConfigs from "../../../configs/menu.configs";
+import { setUser } from "../../../redux/features/userSlice";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);

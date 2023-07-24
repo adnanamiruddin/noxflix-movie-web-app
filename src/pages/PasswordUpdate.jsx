@@ -9,7 +9,7 @@ import { setUser } from "../redux/features/userSlice";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import { Box, Stack, TextField } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
-import Container from "../components/common/Container";
+import Container from "../components/common/Utils/Container";
 import { LoadingButton } from "@mui/lab";
 
 const PasswordUpdate = () => {

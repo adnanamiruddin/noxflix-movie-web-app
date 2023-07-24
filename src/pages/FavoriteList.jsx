@@ -4,12 +4,12 @@ import { useDispatch } from "react-redux";
 import favoriteApi from "../api/modules/favorite.api";
 import { toast } from "react-toastify";
 import { removeFavorite } from "../redux/features/userSlice";
-import MediaItem from "../components/common/MediaItem";
+import MediaItem from "../components/common/Media/MediaItem";
 import { LoadingButton } from "@mui/lab";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { Box, Button, Grid } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
-import Container from "../components/common/Container";
+import Container from "../components/common/Utils/Container";
 
 const FavoriteItem = ({ media, onRemoved }) => {
   const dispatch = useDispatch();

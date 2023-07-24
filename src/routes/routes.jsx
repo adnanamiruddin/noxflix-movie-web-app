@@ -6,7 +6,7 @@ import MediaSearch from "../pages/MediaSearch";
 import PasswordUpdate from "../pages/PasswordUpdate";
 import PersonDetail from "../pages/PersonDetail";
 import ReviewList from "../pages/ReviewList";
-import ProtectedPage from "../components/common/ProtectedPage";
+import ProtectedPage from "../components/common/Utils/ProtectedPage";
 
 export const routesGen = {
   home: "/",

@@ -12,10 +12,10 @@ import {
 } from "@mui/material";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import menuConfigs from "../../configs/menu.configs";
-import uiConfigs from "../../configs/ui.configs.js";
-import { themeModes } from "../../configs/theme.configs";
-import { setThemeMode } from "../../redux/features/themeModeSlice";
+import menuConfigs from "../../../configs/menu.configs";
+import uiConfigs from "../../../configs/ui.configs.js";
+import { themeModes } from "../../../configs/theme.configs";
+import { setThemeMode } from "../../../redux/features/themeModeSlice";
 import Logo from "./Logo";
 
 const Sidebar = ({ open, toggleSidebar }) => {

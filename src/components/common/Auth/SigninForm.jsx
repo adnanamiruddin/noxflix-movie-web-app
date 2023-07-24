@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { setAuthModalOpen } from "../../redux/features/authModalSlice";
-import userApi from "../../api/modules/user.api";
-import { setUser } from "../../redux/features/userSlice";
+import { setAuthModalOpen } from "../../../redux/features/authModalSlice";
+import userApi from "../../../api/modules/user.api";
+import { setUser } from "../../../redux/features/userSlice";
 
 const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();

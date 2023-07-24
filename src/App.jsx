@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import MainLayout from "./components/layout/MainLayout";
-import PageWrapper from "./components/common/PageWrapper";
+import PageWrapper from "./components/common/Utils/PageWrapper";
 import themeConfigs from "./configs/theme.configs";
 import routes from "./routes/routes";
 

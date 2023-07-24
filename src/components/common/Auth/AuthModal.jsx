@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Modal } from "@mui/material";
-import { setAuthModalOpen } from "../../redux/features/authModalSlice";
-import Logo from "./Logo";
+import { setAuthModalOpen } from "../../../redux/features/authModalSlice";
+import Logo from "../Global/Logo";
 import SigninForm from "./SigninForm";
 import SignupForm from "./SignupForm";
 
@@ -51,9 +51,20 @@ const AuthModal = () => {
             <Logo />
           </Box>
 
-          {action === actionState.signin ? <SigninForm switchAuthState={() => switchAuthState(actionState.signup)} /> : ""}
-          {action === actionState.signup ? <SignupForm switchAuthState={() => switchAuthState(actionState.signin)} /> : ""}
-
+          {action === actionState.signin ? (
+            <SigninForm
+              switchAuthState={() => switchAuthState(actionState.signup)}
+            />
+          ) : (
+            ""
+          )}
+          {action === actionState.signup ? (
+            <SignupForm
+              switchAuthState={() => switchAuthState(actionState.signin)}
+            />
+          ) : (
+            ""
+          )}
         </Box>
       </Box>
     </Modal>

@@ -1,5 +1,5 @@
 import { Box, useTheme } from "@mui/material";
-import uiConfigs from "../../configs/ui.configs";
+import uiConfigs from "../../../configs/ui.configs";
 
 const HeaderImage = ({ imgPath }) => {
   const theme = useTheme();
@@ -26,7 +26,7 @@ const HeaderImage = ({ imgPath }) => {
           ...uiConfigs.style.gradientBgImage[theme.palette.mode],
         },
       }}
-    ></Box>
+    />
   );
 };
 

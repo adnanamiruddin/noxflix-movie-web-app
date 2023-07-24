@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { routesGen } from "../../routes/routes";
-import uiConfigs from "../../configs/ui.configs";
-import tmdbConfigs from "../../api/configs/tmdb.configs";
+import { routesGen } from "../../../routes/routes";
+import uiConfigs from "../../../configs/ui.configs";
+import tmdbConfigs from "../../../api/configs/tmdb.configs";
 
 const CastSlide = ({ castList }) => {
   return (

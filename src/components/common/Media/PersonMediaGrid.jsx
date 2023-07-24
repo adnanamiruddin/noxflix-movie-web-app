@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import personApi from "../../api/modules/person.api";
+import personApi from "../../../api/modules/person.api";
 import { toast } from "react-toastify";
 import { Grid, Button } from "@mui/material";
-import tmdbConfigs from "../../api/configs/tmdb.configs";
+import tmdbConfigs from "../../../api/configs/tmdb.configs";
 import MediaItem from "./MediaItem";
 
 const PersonMediaGrid = ({ personId }) => {

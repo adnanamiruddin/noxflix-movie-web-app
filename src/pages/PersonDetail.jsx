@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import uiConfigs from "../configs/ui.configs";
 import tmdbConfigs from "../api/configs/tmdb.configs";
-import Container from "../components/common/Container";
-import PersonMediaGrid from "../components/common/PersonMediaGrid";
-import PostersSlide from "../components/common/PostersSlide";
+import Container from "../components/common/Utils/Container";
+import PersonMediaGrid from "../components/common/Media/PersonMediaGrid";
+import PostersSlide from "../components/common/Media/PostersSlide";
 
 const PersonDetail = () => {
   const { personId } = useParams();

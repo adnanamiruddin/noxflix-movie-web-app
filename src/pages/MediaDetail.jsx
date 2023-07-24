@@ -14,16 +14,16 @@ import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import { addFavorite, removeFavorite } from "../redux/features/userSlice";
 import { toast } from "react-toastify";
-import Container from "../components/common/Container";
-import CircularRate from "../components/common/CircularRate";
-import HeaderImage from "../components/common/HeaderImage";
-import CastSlide from "../components/common/CastSlide";
-import MediaVideosSlide from "../components/common/MediaVideosSlide";
-import BackdropsSlide from "../components/common/BackdropsSlide";
-import PostersSlide from "../components/common/PostersSlide";
-import RecommendationsSlide from "../components/common/RecommendationsSlide";
-import MediaSlide from "../components/common/MediaSlide";
-import MediaReviews from "../components/common/MediaReviews";
+import Container from "../components/common/Utils/Container";
+import CircularRate from "../components/common/Utils/CircularRate";
+import HeaderImage from "../components/common/Media/HeaderImage";
+import CastSlide from "../components/common/Media/CastSlide";
+import MediaVideosSlide from "../components/common/Media/MediaVideosSlide";
+import BackdropsSlide from "../components/common/Media/BackdropsSlide";
+import PostersSlide from "../components/common/Media/PostersSlide";
+import RecommendationsSlide from "../components/common/Media/RecommendationsSlide";
+import MediaSlide from "../components/common/Media/MediaSlide";
+import MediaReviews from "../components/common/Media/MediaReviews";
 
 const MediaDetail = () => {
   const { user, listFavorites } = useSelector((state) => state.user);

@@ -13,9 +13,9 @@ import {
 import { LoadingButton } from "@mui/lab";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
-import reviewApi from "../../api/modules/review.api";
-import TextAvatar from "./TextAvatar";
-import Container from "./Container";
+import reviewApi from "../../../api/modules/review.api";
+import TextAvatar from "../Utils/TextAvatar";
+import Container from "../Utils/Container";
 
 const ReviewItem = ({ review, onRemoved }) => {
   const { user } = useSelector((state) => state.user);

@@ -14,13 +14,13 @@ import {
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
-import { routesGen } from "../../routes/routes";
-import uiConfigs from "../../configs/ui.configs";
-import tmdbConfigs from "../../api/configs/tmdb.configs";
-import mediaApi from "../../api/modules/media.api";
-import genreApi from "../../api/modules/genre.api";
-import CircularRate from "./CircularRate";
+import { setGlobalLoading } from "../../../redux/features/globalLoadingSlice";
+import { routesGen } from "../../../routes/routes";
+import uiConfigs from "../../../configs/ui.configs";
+import tmdbConfigs from "../../../api/configs/tmdb.configs";
+import mediaApi from "../../../api/modules/media.api";
+import genreApi from "../../../api/modules/genre.api";
+import CircularRate from "../Utils/CircularRate";
 
 const HeroSlide = ({ mediaType, mediaCategory }) => {
   const theme = useTheme();
