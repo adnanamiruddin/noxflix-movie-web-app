@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Stack } from "@mui/material";
+import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import Container from "../Utils/Container";
 import Logo from "../Global/Logo";
 import menuConfigs from "../../../configs/menu.configs"
@@ -23,6 +23,16 @@ const Footer = () => {
             ))}
           </Box>
         </Stack>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          display="block"
+          textAlign="center"
+          sx={{ marginTop: 3 }}
+        >
+          This product uses the TMDB API but is not endorsed or certified by
+          TMDB.
+        </Typography>
       </Paper>
     </Container>
   );

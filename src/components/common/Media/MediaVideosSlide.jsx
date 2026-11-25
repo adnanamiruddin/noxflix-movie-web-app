@@ -20,6 +20,7 @@ const MediaVideo = ({ video }) => {
         src={tmdbConfigs.youtubePath(video.key)}
         ref={iframeRef}
         title={video.id}
+        loading="lazy"
         style={{ border: 0 }}
       ></iframe>
     </Box>

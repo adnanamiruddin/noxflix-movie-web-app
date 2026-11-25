@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import personApi from "../api/modules/person.api";
 import { toast } from "react-toastify";
+import usePageTitle from "../hooks/usePageTitle";
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import uiConfigs from "../configs/ui.configs";
 import tmdbConfigs from "../api/configs/tmdb.configs";
 import Container from "../components/common/Utils/Container";
+import ExpandableText from "../components/common/Utils/ExpandableText";
 import PersonMediaGrid from "../components/common/Media/PersonMediaGrid";
 import PostersSlide from "../components/common/Media/PostersSlide";
 
@@ -16,6 +18,8 @@ const PersonDetail = () => {
   const dispatch = useDispatch();
 
   const [person, setPerson] = useState();
+
+  usePageTitle(person ? person.name : "");
 
   useEffect(() => {
     const getPerson = async () => {
@@ -48,12 +52,9 @@ const PersonDetail = () => {
                 <Box
                   sx={{
                     paddingTop: "160%",
-                    backgroundImage: `url(${tmdbConfigs.posterPath(
-                      person.profile_path
-                    )})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundColor: "darkgrey",
+                    ...uiConfigs.style.backgroundImage(
+                      tmdbConfigs.posterPath(person.profile_path)
+                    ),
                   }}
                 />
               </Box>
@@ -73,18 +74,14 @@ const PersonDetail = () => {
                       ? ` - ${person.deathday.split("-")[0]}`
                       : ""}
                     {person.birthday || person.deathday ? ")" : ""}
-                    {/* {`${person.name} (${person.birthday.split("-")[0]}`}
-                    {person.deathday
-                      ? ` - ${person.deathday.split("-")[0]}`
-                      : ""}
-                    {")"} */}
                   </Typography>
                   {/* Person's Name and Birthday Year END */}
 
                   {/* Person's Biography START */}
-                  <Typography sx={{ ...uiConfigs.style.typoLines(10) }}>
-                    {person.biography}
-                  </Typography>
+                  <ExpandableText
+                    text={person.biography || "No biography available."}
+                    lines={10}
+                  />
                   {/* Person's Biography END */}
                 </Stack>
               </Box>

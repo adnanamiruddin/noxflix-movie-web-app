@@ -54,7 +54,7 @@ const SigninForm = ({ switchAuthState }) => {
           name="username"
           value={signinForm.values.username}
           fullWidth
-          color="success"
+          color="primary"
           onChange={signinForm.handleChange}
           helperText={signinForm.touched.username && signinForm.errors.username}
           error={
@@ -68,7 +68,7 @@ const SigninForm = ({ switchAuthState }) => {
           name="password"
           value={signinForm.values.password}
           fullWidth
-          color="success"
+          color="primary"
           onChange={signinForm.handleChange}
           helperText={signinForm.touched.password && signinForm.errors.password}
           error={

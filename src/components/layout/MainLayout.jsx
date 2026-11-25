@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
+import { toast } from "react-toastify";
 import GlobalLoading from "../common/Global/GlobalLoading";
 import Footer from "../common/Global/Footer";
 import Headerbar from "../common/Global/Headerbar";
@@ -17,6 +18,8 @@ const MainLayout = () => {
 
   useEffect(() => {
     const authUser = async () => {
+      if (!localStorage.getItem("actkn")) return;
+
       const { response, error } = await userApi.getInfo();
 
       if (response) dispatch(setUser(response));
@@ -31,7 +34,7 @@ const MainLayout = () => {
       const { response, error } = await favoriteApi.getList();
 
       if (response) dispatch(setListFavorites(response));
-      if (error) dispatch(error.message);
+      if (error) toast.error(error.message);
     };
 
     if (user) getFavorites();

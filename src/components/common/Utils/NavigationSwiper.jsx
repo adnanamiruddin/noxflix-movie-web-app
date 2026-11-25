@@ -15,7 +15,7 @@ const NavigationSwiper = ({ children }) => {
         "& .swiper-pagination-bullet": { backgroundColor: "text.primary" },
         "& .swiper-button-next, & .swiper-button-prev": {
           color: "text.primary",
-          "&::after": { xs: "1rem", md: "2rem" },
+          "&::after": { fontSize: { xs: "1rem", md: "2rem" } },
         },
         "& .swiper": {
           paddingLeft: { xs: "1rem", md: "4rem" },

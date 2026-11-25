@@ -10,9 +10,13 @@ const mediaCategory = {
   on_the_air: "on_the_air"
 };
 
-const backdropPath = (imgEndPoint) => `https://image.tmdb.org/t/p/original${imgEndPoint}`;
+const imagePath = (size, imgEndPoint) =>
+  imgEndPoint ? `https://image.tmdb.org/t/p/${size}${imgEndPoint}` : "";
 
-const posterPath = (imgEndPoint) => `https://image.tmdb.org/t/p/w500${imgEndPoint}`;
+const backdropPath = (imgEndPoint, size = "w1280") =>
+  imagePath(size, imgEndPoint);
+
+const posterPath = (imgEndPoint) => imagePath("w500", imgEndPoint);
 
 const youtubePath = (videoId) => `https://www.youtube.com/embed/${videoId}?controls=0`;
 

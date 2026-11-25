@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoadingButton } from "@mui/lab";
 import { Box, Button, Chip, Divider, Stack, Typography } from "@mui/material";
@@ -14,8 +14,11 @@ import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import { addFavorite, removeFavorite } from "../redux/features/userSlice";
 import { toast } from "react-toastify";
+import usePageTitle from "../hooks/usePageTitle";
 import Container from "../components/common/Utils/Container";
 import CircularRate from "../components/common/Utils/CircularRate";
+import ExpandableText from "../components/common/Utils/ExpandableText";
+import MediaFacts from "../components/common/Media/MediaFacts";
 import HeaderImage from "../components/common/Media/HeaderImage";
 import CastSlide from "../components/common/Media/CastSlide";
 import MediaVideosSlide from "../components/common/Media/MediaVideosSlide";
@@ -36,6 +39,18 @@ const MediaDetail = () => {
   const [genres, setGenres] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [onRequest, setOnRequest] = useState(false);
+
+  const releaseYear = (media?.release_date || media?.first_air_date || "").split(
+    "-"
+  )[0];
+  const title = media
+    ? `${media.title || media.name}${releaseYear ? ` (${releaseYear})` : ""}`
+    : "";
+  const videos = media
+    ? media.videos.results.filter((video) => video.site === "YouTube").slice(0, 6)
+    : [];
+
+  usePageTitle(title);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -104,7 +119,7 @@ const MediaDetail = () => {
     if (error) toast.error(error.message);
   };
 
-  const handleButtonWatchNowClick = () => {
+  const handleTrailerClick = () => {
     videoRef.current.scrollIntoView({
       behavior: "smooth",
     });
@@ -115,7 +130,8 @@ const MediaDetail = () => {
       {/* Media's Backdrop/Background Image START */}
       <HeaderImage
         imgPath={tmdbConfigs.backdropPath(
-          media.backdrop_path || media.poster_path
+          media.backdrop_path || media.poster_path,
+          "original"
         )}
       />
       {/* Media's Backdrop/Background Image END */}
@@ -172,11 +188,9 @@ const MediaDetail = () => {
                   fontWeight="700"
                   textTransform="uppercase"
                   sx={{ ...uiConfigs.style.typoLines(2, "left") }}
-                >{`${media.title || media.name} (${
-                  mediaType === tmdbConfigs.mediaType.movie
-                    ? media.release_date.split("-")[0]
-                    : media.first_air_date.split("-")[0]
-                })`}</Typography>
+                >
+                  {title}
+                </Typography>
                 {/* Media's Title END */}
 
                 {/* Media's Rating and Genres START */}
@@ -194,6 +208,9 @@ const MediaDetail = () => {
                       label={genre.name}
                       variant="filled"
                       color="primary"
+                      clickable
+                      component={Link}
+                      to={`/${mediaType}?genre=${genre.id}`}
                     />
                   ))}
                   {/* Media's Genres END */}
@@ -201,13 +218,15 @@ const MediaDetail = () => {
                 {/* Media's Rating and Genres END */}
 
                 {/* Media's Overview/Description START  */}
-                <Typography
-                  variant="body1"
-                  sx={{ ...uiConfigs.style.typoLines(5) }}
-                >
-                  {media.overview}
-                </Typography>
+                <ExpandableText
+                  text={media.overview || "No overview available."}
+                  lines={5}
+                />
                 {/* Media's Overview/Description END  */}
+
+                {/* Media's Facts START */}
+                <MediaFacts media={media} mediaType={mediaType} />
+                {/* Media's Facts END */}
 
                 {/* Media's Buttons START */}
                 <Stack direction="row" spacing={1}>
@@ -233,25 +252,33 @@ const MediaDetail = () => {
                   />
                   {/* Media's 'Favorite' Button END */}
 
-                  {/* Media's 'WATCH NOW' Button START */}
-                  <Button
-                    variant="contained"
-                    size="large"
-                    sx={{ width: "max-content" }}
-                    startIcon={<PlayArrowIcon />}
-                    onClick={handleButtonWatchNowClick}
-                  >
-                    Watch Now!
-                  </Button>
-                  {/* Media's 'WATCH NOW' Buttons END */}
+                  {/* Media's 'TRAILER' Button START */}
+                  {videos.length > 0 ? (
+                    <Button
+                      variant="contained"
+                      size="large"
+                      sx={{ width: "max-content" }}
+                      startIcon={<PlayArrowIcon />}
+                      onClick={handleTrailerClick}
+                    >
+                      Trailer
+                    </Button>
+                  ) : (
+                    ""
+                  )}
+                  {/* Media's 'TRAILER' Button END */}
                 </Stack>
                 {/* Media's Button END */}
               </Stack>
 
               {/* Media's Cast START */}
-              <Container header="Cast">
-                <CastSlide castList={media.credits.cast} />
-              </Container>
+              {media.credits.cast.length > 0 ? (
+                <Container header="Cast">
+                  <CastSlide castList={media.credits.cast.slice(0, 20)} />
+                </Container>
+              ) : (
+                ""
+              )}
               {/* Media's Cast END */}
             </Box>
             {/* Media's Information END */}
@@ -260,11 +287,15 @@ const MediaDetail = () => {
         {/* Media' Content END */}
 
         {/* Media's Videos START */}
-        <div ref={videoRef} style={{ paddingTop: "2rem" }}>
-          <Container header="Videos">
-            <MediaVideosSlide videos={[...media.videos.results].splice(0, 6)} />
-          </Container>
-        </div>
+        {videos.length > 0 ? (
+          <div ref={videoRef} style={{ paddingTop: "2rem" }}>
+            <Container header="Videos">
+              <MediaVideosSlide videos={videos} />
+            </Container>
+          </div>
+        ) : (
+          ""
+        )}
         {/* Media's Videos END */}
 
         {/* Media's Posters START */}

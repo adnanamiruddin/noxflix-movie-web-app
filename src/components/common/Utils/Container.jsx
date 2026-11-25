@@ -1,6 +1,7 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box, Button, Stack, Typography } from "@mui/material";
 
-const Container = ({ header, children }) => {
+const Container = ({ header, action, children }) => {
   return (
     <Box
       sx={{
@@ -16,6 +17,9 @@ const Container = ({ header, children }) => {
             sx={{
               width: "100%",
               position: "relative",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
               paddingX: { xs: "20px", md: 0 },
               maxWidth: "1366px",
               marginX: "auto",
@@ -34,6 +38,19 @@ const Container = ({ header, children }) => {
             <Typography variant="h5" fontWeight="700" textTransform="uppercase">
               {header}
             </Typography>
+            {action ? (
+              <Button
+                color="inherit"
+                size="small"
+                LinkComponent={Link}
+                to={action.to}
+                sx={{ fontWeight: "600" }}
+              >
+                {action.label}
+              </Button>
+            ) : (
+              ""
+            )}
           </Box>
         ) : (
           ""

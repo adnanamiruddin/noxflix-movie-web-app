@@ -1,60 +1,108 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import mediaApi from "../api/modules/media.api";
 import { toast } from "react-toastify";
-import { Box, Button, Stack, TextField, Toolbar } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  TextField,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
+import usePagedList from "../hooks/usePagedList";
+import Container from "../components/common/Utils/Container";
 import MediaGrid from "../components/common/Media/MediaGrid";
+import MediaSlide from "../components/common/Media/MediaSlide";
 import { LoadingButton } from "@mui/lab";
 
 const mediaTypes = ["movie", "tv", "people"];
+const placeholders = {
+  movie: "Search movies",
+  tv: "Search TV series",
+  people: "Search people",
+};
+const suggestionHeaders = {
+  movie: "Popular Movies",
+  tv: "Popular Series",
+};
 let timer;
 const timeout = 500;
 
 const MediaSearch = () => {
-  const [query, setQuery] = useState("");
-  const [onSearch, setOnSearch] = useState(false);
-  const [mediaType, setMediaType] = useState(mediaTypes[0]);
-  const [medias, setMedias] = useState([]);
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const search = useCallback(async () => {
-    setOnSearch(true);
-    const { response, error } = await mediaApi.search({
-      mediaType,
-      query,
-      page,
-    });
-    setOnSearch(false);
+  const queryParam = searchParams.get("q") || "";
+  const query = queryParam.trim();
+  const typeParam = searchParams.get("type");
+  const mediaType = mediaTypes.includes(typeParam) ? typeParam : mediaTypes[0];
 
-    if (response) {
-      if (page > 1) setMedias((medias) => [...medias, ...response.results]);
-      else setMedias([...response.results]);
+  const [inputValue, setInputValue] = useState(queryParam);
+  const [status, setStatus] = useState("idle");
+
+  const { page, items: medias, totalPages, loadMore, receive } = usePagedList(
+    `${mediaType}/${query}`
+  );
+
+  useEffect(() => {
+    setInputValue(queryParam);
+  }, [queryParam]);
+
+  useEffect(() => () => clearTimeout(timer), []);
+
+  useEffect(() => {
+    if (query.length === 0) {
+      setStatus("idle");
+      return;
     }
-    if (error) toast.error(error.message);
-  }, [mediaType, query, page]);
 
-  useEffect(() => {
-    if (query.trim().length === 0) {
-      setMedias([]);
-      setPage(1);
-    } else search();
-  }, [search, query, mediaType, page]);
+    let ignore = false;
 
-  useEffect(() => {
-    setMedias([]);
-    setPage(1);
-  }, [mediaType]);
+    const search = async () => {
+      setStatus("loading");
+      const { response, error } = await mediaApi.search({
+        mediaType,
+        query,
+        page,
+      });
+      if (ignore) return;
 
-  const handleCategoryChange = (selectedCategory) =>
-    setMediaType(selectedCategory);
+      if (response) {
+        receive(response, page);
+        setStatus("done");
+      }
+      if (error) {
+        setStatus("error");
+        toast.error(error.message);
+      }
+    };
+
+    search();
+
+    return () => {
+      ignore = true;
+    };
+  }, [mediaType, query, page, receive]);
+
+  const updateParams = (next) =>
+    setSearchParams(
+      (prev) => {
+        const params = new URLSearchParams(prev);
+        Object.entries(next).forEach(([key, value]) =>
+          value ? params.set(key, value) : params.delete(key)
+        );
+        return params;
+      },
+      { replace: true }
+    );
 
   const onQueryChange = (e) => {
-    const newQuery = e.target.value;
+    const value = e.target.value;
+    setInputValue(value);
     clearTimeout(timer);
 
-    timer = setTimeout(() => {
-      setQuery(newQuery);
-    }, timeout);
+    timer = setTimeout(() => updateParams({ q: value }), timeout);
   };
 
   return (
@@ -68,9 +116,9 @@ const MediaSearch = () => {
             justifyContent="center"
             sx={{ width: "100%" }}
           >
-            {mediaTypes.map((type, i) => (
+            {mediaTypes.map((type) => (
               <Button
-                key={i}
+                key={type}
                 variant={mediaType === type ? "contained" : "text"}
                 size="large"
                 sx={{
@@ -79,22 +127,40 @@ const MediaSearch = () => {
                       ? "primary.contrastText"
                       : "text.primary",
                 }}
-                onClick={() => handleCategoryChange(type)}
+                onClick={() => updateParams({ type })}
               >
                 {type}
               </Button>
             ))}
           </Stack>
           <TextField
-            color="warning"
-            placeholder="NoxViews Searching"
+            color="secondary"
+            placeholder={placeholders[mediaType]}
+            inputProps={{ "aria-label": placeholders[mediaType] }}
             autoFocus
+            value={inputValue}
             sx={{ width: "100%" }}
             onChange={onQueryChange}
           />
           <MediaGrid medias={medias} mediaType={mediaType} />
 
-          {medias.length > 0 ? (
+          {status === "done" && medias.length === 0 ? (
+            <Typography color="text.secondary" textAlign="center">
+              {`No results found for "${query}".`}
+            </Typography>
+          ) : (
+            ""
+          )}
+
+          {query.length === 0 && suggestionHeaders[mediaType] ? (
+            <Container header={suggestionHeaders[mediaType]}>
+              <MediaSlide mediaType={mediaType} mediaCategory="popular" />
+            </Container>
+          ) : (
+            ""
+          )}
+
+          {medias.length > 0 && page < totalPages ? (
             <LoadingButton
               sx={{
                 width: { xs: "90%", md: "70%" },
@@ -106,8 +172,8 @@ const MediaSearch = () => {
                   color: "primary.contrastText",
                 },
               }}
-              loading={onSearch}
-              onClick={() => setPage(page + 1)}
+              loading={status === "loading"}
+              onClick={loadMore}
             >
               Load More
             </LoadingButton>

@@ -11,8 +11,8 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import { Autoplay } from "swiper";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { setGlobalLoading } from "../../../redux/features/globalLoadingSlice";
 import { routesGen } from "../../../routes/routes";
@@ -30,40 +30,45 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-    const getMedias = async () => {
-      const { response, error } = await mediaApi.getList({
-        mediaType,
-        mediaCategory,
-        page: 1,
-      });
-      if (response) setMovies(response.results);
-      if (error) toast.error(error.message);
-      dispatch(setGlobalLoading(false));
-    };
+    let ignore = false;
 
-    const getGenres = async () => {
+    const loadHero = async () => {
       dispatch(setGlobalLoading(true));
-      const { response, error } = await genreApi.getList({
-        mediaType,
-      });
-      if (response) {
-        setGenres(response.genres);
-        getMedias();
-      }
-      if (error) {
-        toast.error(error.message);
-        setGlobalLoading(false);
-      }
+      const [genreResult, mediaResult] = await Promise.all([
+        genreApi.getList({ mediaType }),
+        mediaApi.getList({ mediaType, mediaCategory, page: 1 }),
+      ]);
+      dispatch(setGlobalLoading(false));
+      if (ignore) return;
+
+      if (genreResult.response) setGenres(genreResult.response.genres);
+      if (mediaResult.response) setMovies(mediaResult.response.results);
+      if (mediaResult.error) toast.error(mediaResult.error.message);
     };
 
-    getGenres();
+    loadHero();
+
+    return () => {
+      ignore = true;
+    };
   }, [mediaType, mediaCategory, dispatch]);
+
+  const getGenreNames = (movie) =>
+    (movie.genre_ids || [])
+      .map((genreId) => genres.find((genre) => genre.id === genreId)?.name)
+      .filter(Boolean)
+      .slice(0, 2);
+
+  const getYear = (movie) =>
+    (movie.release_date || movie.first_air_date || "").slice(0, 4);
 
   return (
     <Box
       sx={{
         position: "relative",
         color: "primary.contrastText",
+        "& .swiper-pagination": { bottom: "5rem" },
+        "& .swiper-pagination-bullet": { backgroundColor: "text.primary" },
         "&::before": {
           content: '""',
           width: "100%",
@@ -81,13 +86,15 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
         grabCursor={true}
         loop={true}
         style={{ width: "100%", height: "max-content" }}
-        modules={[Autoplay]}
+        modules={[Autoplay, Pagination]}
+        pagination={{ clickable: true }}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
       >
-        {movies.map((movie, i) => (
+        {movies.slice(0, 10).map((movie, i) => (
           <SwiperSlide key={i}>
             <Box
               sx={{
@@ -150,17 +157,18 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                     {/* Movie's Rating END */}
 
                     <Divider orientation="vertical" />
+                    {getYear(movie) ? (
+                      <Typography fontWeight="600">{getYear(movie)}</Typography>
+                    ) : (
+                      ""
+                    )}
                     {/* Movie's Genre START */}
-                    {[...movie.genre_ids].splice(0, 2).map((genreId, i) => (
+                    {getGenreNames(movie).map((name) => (
                       <Chip
-                        key={i}
+                        key={name}
                         variant="filled"
                         color="primary"
-                        label={
-                          genres.find((e) => e.id === genreId)
-                            ? genres.find((e) => e.id === genreId).name
-                            : ""
-                        }
+                        label={name}
                       />
                     ))}
                   </Stack>
@@ -179,13 +187,13 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                   <Button
                     variant="contained"
                     size="large"
-                    startIcon={<PlayArrowIcon />}
+                    startIcon={<InfoOutlinedIcon />}
                     LinkComponent={Link}
                     to={routesGen.mediaDetail(mediaType, movie.id)}
                     sx={{ width: "max-content" }}
                     color="error"
                   >
-                    Watch Now!
+                    Details
                   </Button>
                   {/* Movie's Watch Button END */}
                 </Stack>

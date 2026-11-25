@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import {
@@ -14,6 +14,7 @@ import { LoadingButton } from "@mui/lab";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import reviewApi from "../../../api/modules/review.api";
+import { setAuthModalOpen } from "../../../redux/features/authModalSlice";
 import TextAvatar from "../Utils/TextAvatar";
 import Container from "../Utils/Container";
 
@@ -89,6 +90,7 @@ const ReviewItem = ({ review, onRemoved }) => {
 
 const MediaReviews = ({ media, mediaType, reviews }) => {
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const initialCountToShow = 5;
 
@@ -154,6 +156,11 @@ const MediaReviews = ({ media, mediaType, reviews }) => {
     <div>
       <Container header={`Reviews & Comments (${reviewCount})`}>
         <Stack marginBottom={2} spacing={4}>
+          {reviewCount === 0 ? (
+            <Typography color="text.secondary">No reviews yet.</Typography>
+          ) : (
+            ""
+          )}
           {filteredReviews.map((review) => (
             <Box key={review.id}>
               <ReviewItem review={review} onRemoved={onRemoved} />
@@ -198,7 +205,17 @@ const MediaReviews = ({ media, mediaType, reviews }) => {
               </Stack>
             </div>
           ) : (
-            ""
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Typography color="text.secondary">
+                Sign in to write a review.
+              </Typography>
+              <Button
+                variant="outlined"
+                onClick={() => dispatch(setAuthModalOpen(true))}
+              >
+                Sign In
+              </Button>
+            </Stack>
           )}
           {/* User's Post Review START */}
         </Stack>

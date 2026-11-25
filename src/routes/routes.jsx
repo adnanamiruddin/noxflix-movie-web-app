@@ -6,7 +6,9 @@ import MediaSearch from "../pages/MediaSearch";
 import PasswordUpdate from "../pages/PasswordUpdate";
 import PersonDetail from "../pages/PersonDetail";
 import ReviewList from "../pages/ReviewList";
+import NotFound from "../pages/NotFound";
 import ProtectedPage from "../components/common/Utils/ProtectedPage";
+import MediaTypeGuard from "../components/common/Utils/MediaTypeGuard";
 
 export const routesGen = {
   home: "/",
@@ -15,7 +17,7 @@ export const routesGen = {
   mediaSearch: "/search",
   person: (id) => `/person/${id}`,
   favoriteList: "/favorites",
-  passwordUpdate: "password-update",
+  passwordUpdate: "/password-update",
 };
 
 const routes = [
@@ -26,11 +28,19 @@ const routes = [
   },
   {
     path: "/:mediaType/:mediaId",
-    element: <MediaDetail />,
+    element: (
+      <MediaTypeGuard>
+        <MediaDetail />
+      </MediaTypeGuard>
+    ),
   },
   {
     path: "/:mediaType",
-    element: <MediaList />,
+    element: (
+      <MediaTypeGuard>
+        <MediaList />
+      </MediaTypeGuard>
+    ),
   },
   {
     path: "/search",
@@ -68,6 +78,11 @@ const routes = [
       </ProtectedPage>
     ),
     state: "reviews",
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+    state: "notfound",
   },
 ];
 

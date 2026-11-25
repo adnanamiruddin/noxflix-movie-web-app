@@ -11,7 +11,7 @@ const HeaderImage = ({ imgPath }) => {
         zIndex: "-1",
         paddingTop: { xs: "60%", sm: "40%", md: "35%" },
         // THE MEDIA'S IMAGE
-        backgroundImage: `url(${imgPath})`,
+        backgroundImage: imgPath ? `url(${imgPath})` : "none",
         backgroundPosition: "top",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",

@@ -66,7 +66,7 @@ const SignupForm = ({ switchAuthState }) => {
           name="username"
           value={signupForm.values.username}
           fullWidth
-          color="success"
+          color="primary"
           onChange={signupForm.handleChange}
           helperText={signupForm.touched.username && signupForm.errors.username}
           error={
@@ -80,7 +80,7 @@ const SignupForm = ({ switchAuthState }) => {
           name="displayName"
           value={signupForm.values.displayName}
           fullWidth
-          color="success"
+          color="primary"
           onChange={signupForm.handleChange}
           helperText={
             signupForm.touched.displayName && signupForm.errors.displayName
@@ -96,7 +96,7 @@ const SignupForm = ({ switchAuthState }) => {
           name="password"
           value={signupForm.values.password}
           fullWidth
-          color="success"
+          color="primary"
           onChange={signupForm.handleChange}
           helperText={signupForm.touched.password && signupForm.errors.password}
           error={
@@ -110,7 +110,7 @@ const SignupForm = ({ switchAuthState }) => {
           name="confirmPassword"
           value={signupForm.values.confirmPassword}
           fullWidth
-          color="success"
+          color="primary"
           onChange={signupForm.handleChange}
           helperText={
             signupForm.touched.confirmPassword &&

@@ -1,7 +1,7 @@
 import axios from "axios";
 import queryString from "query-string";
-
-const baseURL = import.meta.env.VITE_REACT_APP_BASEURL;
+import toApiError from "./api.error";
+import { baseURL, unwrapResponse } from "./api.response";
 
 const privateClient = axios.create({
   baseURL,
@@ -21,12 +21,9 @@ privateClient.interceptors.request.use(async (config) => {
 });
 
 privateClient.interceptors.response.use(
-  (response) => {
-    if (response && response.data) return response.data;
-    return response;
-  },
+  unwrapResponse,
   (err) => {
-    throw err.response.data;
+    throw toApiError(err);
   }
 );
 

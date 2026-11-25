@@ -11,6 +11,7 @@ import {
   useScrollTrigger,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import menuConfigs from "../../../configs/menu.configs";
@@ -83,6 +84,7 @@ const Headerbar = () => {
               {/* Mobile View (Hamburger Icon) START */}
               <IconButton
                 color="inherit"
+                aria-label="Open menu"
                 sx={{ mr: 2, display: { md: "none" } }}
                 onClick={toggleSidebar}
               >
@@ -120,7 +122,11 @@ const Headerbar = () => {
                   {menu.display}
                 </Button>
               ))}
-              <IconButton sx={{ color: "inherit" }} onClick={onSwitchTheme}>
+              <IconButton
+                aria-label="Toggle theme"
+                sx={{ color: "inherit" }}
+                onClick={onSwitchTheme}
+              >
                 {themeMode === themeModes.dark ? <DarkModeOutlinedIcon /> : ""}
                 {themeMode === themeModes.light ? <WbSunnyOutlinedIcon /> : ""}
               </IconButton>
@@ -130,6 +136,15 @@ const Headerbar = () => {
             {/* User Menu Section START */}
             {/* If User Haven't Sign In START */}
             <Stack spacing={3} direction="row" alignItems="center">
+              <IconButton
+                color="inherit"
+                aria-label="Search"
+                LinkComponent={Link}
+                to="/search"
+                sx={{ display: { xs: "inline-flex", md: "none" } }}
+              >
+                <SearchOutlinedIcon />
+              </IconButton>
               {!user ? (
                 <Button
                   variant="contained"

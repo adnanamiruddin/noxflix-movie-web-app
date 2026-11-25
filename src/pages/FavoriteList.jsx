@@ -7,7 +7,7 @@ import { removeFavorite } from "../redux/features/userSlice";
 import MediaItem from "../components/common/Media/MediaItem";
 import { LoadingButton } from "@mui/lab";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Utils/Container";
 
@@ -60,6 +60,7 @@ const FavoriteList = () => {
   const [filteredMedias, setFilteredMedias] = useState([]);
   const [page, setPage] = useState(1);
   const [favoritesCount, setFavoritesCount] = useState(0);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const getFavorites = async () => {
@@ -71,6 +72,7 @@ const FavoriteList = () => {
         setMedias([...response]);
         setFilteredMedias([...response].splice(0, initialCountToShow));
         setFavoritesCount(response.length);
+        setLoaded(true);
       }
       if (error) toast.error(error.message);
     };
@@ -81,7 +83,7 @@ const FavoriteList = () => {
   const handleLoadMoreFavorites = () => {
     setFilteredMedias([
       ...filteredMedias,
-      ...[...medias].splice(page, initialCountToShow, initialCountToShow),
+      ...medias.slice(page * initialCountToShow, (page + 1) * initialCountToShow),
     ]);
     setPage(page + 1);
   };
@@ -105,6 +107,11 @@ const FavoriteList = () => {
             </Grid>
           ))}
         </Grid>
+        {loaded && favoritesCount === 0 ? (
+          <Typography color="text.secondary">No favorites yet.</Typography>
+        ) : (
+          ""
+        )}
         {filteredMedias.length < medias.length ? (
           <Button
             color="primary"

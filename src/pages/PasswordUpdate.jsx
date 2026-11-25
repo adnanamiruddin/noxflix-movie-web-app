@@ -73,7 +73,7 @@ const PasswordUpdate = () => {
               name="password"
               value={updatePasswordForm.values.password}
               fullWidth
-              color="success"
+              color="primary"
               onChange={updatePasswordForm.handleChange}
               helperText={
                 updatePasswordForm.touched.password &&
@@ -90,7 +90,7 @@ const PasswordUpdate = () => {
               name="newPassword"
               value={updatePasswordForm.values.newPassword}
               fullWidth
-              color="success"
+              color="primary"
               onChange={updatePasswordForm.handleChange}
               helperText={
                 updatePasswordForm.touched.newPassword &&
@@ -107,7 +107,7 @@ const PasswordUpdate = () => {
               name="confirmNewPassword"
               value={updatePasswordForm.values.confirmNewPassword}
               fullWidth
-              color="success"
+              color="primary"
               onChange={updatePasswordForm.handleChange}
               helperText={
                 updatePasswordForm.touched.confirmNewPassword &&

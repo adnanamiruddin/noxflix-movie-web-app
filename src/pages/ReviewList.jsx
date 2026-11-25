@@ -114,6 +114,7 @@ const ReviewList = () => {
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [page, setPage] = useState(1);
   const [reviewsCount, setReviewsCount] = useState(0);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const getReviews = async () => {
@@ -125,6 +126,7 @@ const ReviewList = () => {
         setReviews([...response]);
         setFilteredReviews([...response].splice(0, initialCountToShow));
         setReviewsCount(response.length);
+        setLoaded(true);
       }
       if (error) toast.error(error.message);
     };
@@ -135,7 +137,7 @@ const ReviewList = () => {
   const handleLoadMoreFavorites = () => {
     setFilteredReviews([
       ...filteredReviews,
-      ...[...reviews].splice(page, initialCountToShow, initialCountToShow),
+      ...reviews.slice(page * initialCountToShow, (page + 1) * initialCountToShow),
     ]);
     setPage(page + 1);
   };
@@ -153,6 +155,11 @@ const ReviewList = () => {
     <Box sx={{ ...uiConfigs.style.mainContent }}>
       <Container header={`Your Reviews (${reviewsCount})`}>
         <Stack spacing={2}>
+          {loaded && reviewsCount === 0 ? (
+            <Typography color="text.secondary">No reviews yet.</Typography>
+          ) : (
+            ""
+          )}
           {filteredReviews.map((review) => (
             <Box key={review.id}>
               <ReviewItem review={review} onRemoved={onRemoved} />
